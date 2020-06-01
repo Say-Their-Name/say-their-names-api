@@ -1,8 +1,8 @@
 # Backend API
 
 ```bash
-git clone project
-cd into project
+git clone https://github.com/Say-Their-Name/api.git
+cd api
 
 // Copy Your Environment files
 cp .env.example .env
@@ -20,8 +20,8 @@ php artisan key:generate
 // Each Person has
 // 1 Donation Link
 // 1 Petition Link
-// 3 Media Articles
-// 4 Images
+// 1 Media Articles
+// 1 Image
 php artisan migrate:fresh --seed
 
 // Run the application
