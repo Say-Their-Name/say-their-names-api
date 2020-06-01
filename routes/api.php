@@ -8,7 +8,6 @@ use App\Http\Controllers\API\Petitions\GetSinglePetitionController;
 use App\Http\Controllers\API\Petitions\ListPetitionsController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::middleware('api')->group(function () {
     Route::get('people', ListPeopleController::class);
     Route::get('people/{person}', GetSinglePersonController::class);
@@ -18,5 +17,4 @@ Route::middleware('api')->group(function () {
 
     Route::get('petitions', ListPetitionsController::class);
     Route::get('petitions/{petition}', GetSinglePetitionController::class);
-
 });
