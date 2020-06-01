@@ -12,27 +12,27 @@
         <p> Available Links</p>
 
         <code>
-            http://104.248.128.33/api/people
+            https://saytheirnames.dev/api/people
         </code>
         <br>
         <code>
-            http://104.248.128.33/api/people/{id}
+            https://saytheirnames.dev/api/people/{id}
         </code>
         <br>
         <code>
-            http://104.248.128.33/api/petitions
+            https://saytheirnames.dev/api/petitions
         </code>
         <br>
         <code>
-            http://104.248.128.33/api/petitions/{id}
+            https://saytheirnames.dev/api/petitions/{id}
         </code>
         <br>
         <code>
-            http://104.248.128.33/api/donations
+            https://saytheirnames.dev/api/donations
         </code>
         <br>
         <code>
-            http://104.248.128.33/api/donations/{id}
+            https://saytheirnames.dev/api/donations/{id}
         </code>
     </body>
 </html>
