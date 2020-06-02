@@ -34,5 +34,32 @@
         <code>
             https://saytheirnames.dev/api/donations/{id}
         </code>
+        <hr />
+        <p>Authentication</p>
+        <br>
+        <code>
+            https://saytheirnames.dev/api/login
+        </code>
+        <pre>
+            <br>
+            email *
+            <br>
+            password *
+        </pre>
+        <br>
+        <code>
+            https://saytheirnames.dev/api/register
+        </code>
+        <pre>
+            <br>
+            name *
+            <br>
+            email *
+            <br>
+            password *
+            <br>
+            password_confirmation *
+        </pre>
+        <hr />
     </body>
 </html>
