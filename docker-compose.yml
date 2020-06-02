@@ -1,0 +1,74 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      dockerfile: ./provisioning/dev/Dockerfile
+      context: .
+      network: host
+    user: ${CURRENT_UID}
+    environment:
+      - PHP_IDE_CONFIG=serverName=docker
+      - HOST_IP=${HOST_IP}
+    depends_on:
+      # - db
+      - redis
+    volumes:
+      - ./:/var/www/html
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./provisioning/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/html
+    ports:
+      - "8000:8000"
+    depends_on:
+      - app
+
+  redis:
+    image: redis:5
+    ports:
+      - "6379:6379"
+
+  mail:
+    image: mailhog/mailhog
+    ports:
+      - "41025:1025"
+      - "48025:8025"
+
+  #  horizon:
+  #    build:
+  #      context: ./provisioning
+  #      network: host
+  #    user: ${CURRENT_UID}
+  #    depends_on:
+  #      - db
+  #      - redis
+  #    volumes:
+  #      - ./:/var/www/html
+  #    command: ['php', 'artisan', 'horizon']
+
+  #  adminer:
+  #    image: adminer
+  #    depends_on:
+  #      - db
+  #    environment:
+  #      - ADMINER_DEFAULT_SERVER=db
+  #    volumes:
+  #      - ./provisioning/adminer.css:/var/www/html/adminer.css
+
+  #  db:
+  #    image: mysql:8
+  #    environment:
+  #      - MYSQL_ROOT_PASSWORD=secret
+  #      - MYSQL_DATABASE=platform
+  #    volumes:
+  #      - mysql-storage:/var/lib/mysql
+  #    ports:
+  #      - 49306:3306
+
+
+#volumes:
+#  mysql-storage:
+#  mongo-storage:

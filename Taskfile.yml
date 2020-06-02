@@ -1,0 +1,164 @@
+version: '2'
+
+vars:
+  UID:
+    sh: id -u
+  GID:
+    sh: id -g
+  PREFIX: docker-compose exec app
+  HOST_IP:
+    sh: ip route get 1.2.3.4 | awk '{print $7}' | tr -d '\n'
+
+env:
+  CURRENT_UID: "{{.UID}}:{{.GID}}"
+  HOST_IP: "{{.HOST_IP}}"
+
+tasks:
+  build:
+    desc: Build Dev Dockerfile
+    deps: [stop]
+    cmds:
+      - docker-compose build
+    sources:
+      - provisioning/DockerfileDev
+    method: checksum
+
+  vendor:
+    desc: Install composer deps
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} composer install --ignore-platform-reqs"
+    sources:
+      - composer.json
+    generates:
+      - vendor
+      - composer.lock
+    method: checksum
+
+  start:
+    desc: Start the docker-compose stack
+    cmds:
+      - docker-compose up -d
+    status:
+      - test -n "$(docker-compose top)"
+    env:
+
+  stop:
+    desc: Stop the docker-compose stack
+    cmds:
+      - docker-compose stop
+    status:
+      - test -z "$(docker-compose top)"
+
+  logs:
+    desc: Display syslog
+    deps: [start]
+    cmds:
+      - docker-compose logs -f
+
+  dbreset:
+    desc: Reset the database and run the seed
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} php artisan migrate:fresh --seed && redis-cli flushall"
+
+  sh:
+    desc: Get a shell from the main container
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} bash"
+
+  phpcs:
+    desc: Run PHP Code Sniffer
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which phpcs` app'"
+
+  phpcs-fix:
+    desc: Run PHP Code Sniffer Fixer
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which php-cs-fixer` fix app'"
+
+  phpmd:
+    desc: Run PHP Mess Detector
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which phpmd` ./app html cleancode,codesize,controversial,design,naming,unusedcode --ignore-violations-on-exit --reportfile ./docs/phpmd-report.html'"
+
+  phpmnd:
+    desc: Run PHP Magic Number Detector
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which phpmnd` app'"
+
+  dephpend:
+    desc: Run DePHPend
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which dephpend` text app'"
+
+  phploc:
+    desc: Run PhpLoc
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which phploc` app'"
+
+  phpcpd:
+    desc: Run Php Copy/Paste Detector
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which phpcpd` --fuzzy app'"
+
+  churn:
+    desc: Run Php Churn
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which churn` run app -c churn.yml'"
+
+  phpcf:
+    desc: Run Php Code Fixer
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which phpcf` -t 7.4 app'"
+
+  phpmetrics:
+    desc: Run Php Metrics
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which phpmetrics` --report-html=./docs/phpmetrics app'"
+
+  security-checker:
+    desc: Run SensioLabs PHP Security Checker
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'php -d memory_limit=2G `which security-checker` security:check composer.lock'"
+
+  phpstan:
+    desc: Run PHPSTan static analysis
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} ./vendor/bin/phpstan analyse --memory-limit=2G"
+
+  phpinsights:
+    desc: Run PHP Insights code quality analysis
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} php -d memory_limit=2G artisan insights"
+
+  phpinsights-fix:
+    desc: Run PHP Insights code quality analysis and fix errors.
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} php -d memory_limit=2G artisan insights --fix"
+
+  test:
+    desc: Run phpunit
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} php vendor/bin/phpunit --configuration phpunit.xml -v --testdox --coverage-html ./docs/coverage/"
+
+  default:
+    desc: Default task, starts in foreground
+    cmds:
+      - docker-compose up

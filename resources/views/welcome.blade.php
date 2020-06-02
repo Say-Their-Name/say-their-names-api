@@ -60,6 +60,28 @@
             <br>
             password_confirmation *
         </pre>
+        <br>
+        <code>
+            https://saytheirnames.dev/api/request/password-reset
+        </code>
+        <pre>
+            <br>
+            email *
+        </pre>
+        <br>
+        <code>
+            https://saytheirnames.dev/api/password/reset
+        </code>
+        <pre>
+            <br>
+            token *
+            <br>
+            email *
+            <br>
+            password *
+            <br>
+            password_confirmation *
+        </pre>
         <hr />
     </body>
 </html>
