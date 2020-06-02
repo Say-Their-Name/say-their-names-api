@@ -94,6 +94,9 @@ php artisan key:generate
 // 1 Image
 php artisan migrate:fresh --seed
 
+// Run tests
+php artisan test
+
 // Run the application
 php artisan serve
 ```
