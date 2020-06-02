@@ -20,7 +20,7 @@ class Source extends Model
             'id' => 1,
             'name' => 'CNN',
             'rss_feed_url' => 'https://edition.cnn.com/services/rss/',
-            'source_logo' => 'https://vignette.wikia.nocookie.net/logopedia/images/5/52/CNN_%282014%29.svg/revision/latest/scale-to-width-down/200?cb=20180509053533',
+            'source_logo' => 'https://lorempixel.com/640/480/?28870',
             'source_link'=> 'http://edition.cnn.com',
         ]
     ];
