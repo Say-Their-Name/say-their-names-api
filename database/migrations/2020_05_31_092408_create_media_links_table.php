@@ -11,9 +11,13 @@ class CreateMediaLinksTable extends Migration
         Schema::create('media_links', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('person_id');
+            $table->unsignedBigInteger('source_id');
             $table->string('title');
             $table->text('description');
             $table->string('link');
+            $table->string('image_url')->nullable();
+            $table->string('video_url')->nullable();
+            $table->foreign('source_id')->references('id')->on('sources');
             $table->foreign('person_id')->references('id')->on('people');
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();

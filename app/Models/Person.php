@@ -7,7 +7,6 @@ use App\Models\Traits\HasMedia;
 use App\Models\Traits\HasPetitions;
 use App\Models\Traits\HasSocialMedia;
 use App\Models\Traits\Unguarded;
-use Carbon\Carbon;
 
 class Person extends BaseModel
 {
@@ -16,15 +15,6 @@ class Person extends BaseModel
     use HasDonations;
     use HasMedia;
     use HasSocialMedia;
-
-    protected $appends = [
-        'age',
-    ];
-
-    public function getAgeAttribute($value)
-    {
-        return Carbon::parse($this->date_of_birth)->age;
-    }
 
     public function images()
     {

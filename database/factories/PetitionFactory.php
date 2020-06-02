@@ -10,5 +10,6 @@ $factory->define(PetitionLinks::class, function (Faker $faker) {
         'title' => $faker->paragraph,
         'description' => $faker->paragraph,
         'link' => $faker->url,
+        'status' => 1
     ];
 });

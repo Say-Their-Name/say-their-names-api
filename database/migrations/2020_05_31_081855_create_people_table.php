@@ -11,12 +11,14 @@ class CreatePeopleTable extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
-            $table->date('date_of_birth');
+            $table->date('date_of_birth')->nullable();
             $table->date('date_of_incident');
-            $table->string('number_of_children');
-            $table->string('location');
-            $table->text('biography');
-            $table->text('context');
+            $table->string('number_of_children')->nullable();
+            $table->string('age');
+            $table->string('city');
+            $table->string('country');
+            $table->text('biography')->nullable();
+            $table->text('context')->nullable();
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();

@@ -10,5 +10,7 @@ $factory->define(MediaLinks::class, function (Faker $faker) {
         'title' => $faker->paragraph,
         'description' => $faker->paragraph,
         'link' => $faker->url,
+        'source_id' => 1,
+        'status' => 1
     ];
 });

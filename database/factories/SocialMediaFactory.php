@@ -10,5 +10,6 @@ $factory->define(SocialMedia::class, function (Faker $faker) {
         'title' => '#' . $faker->word(),
         'type' => 'hashtag',
         'link' => $faker->url,
+        'status' => 1
     ];
 });
