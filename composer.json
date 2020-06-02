@@ -17,6 +17,7 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "maatwebsite/excel": "^3.1",
+        "tucker-eric/eloquentfilter": "^2.3",
         "tymon/jwt-auth": "1.0.*"
     },
     "require-dev": {

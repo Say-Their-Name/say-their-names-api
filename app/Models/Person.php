@@ -7,6 +7,7 @@ use App\Models\Traits\HasMedia;
 use App\Models\Traits\HasPetitions;
 use App\Models\Traits\HasSocialMedia;
 use App\Models\Traits\Unguarded;
+use EloquentFilter\Filterable;
 
 class Person extends BaseModel
 {
@@ -15,6 +16,8 @@ class Person extends BaseModel
     use HasDonations;
     use HasMedia;
     use HasSocialMedia;
+    use Filterable;
+
 
     public function images()
     {
