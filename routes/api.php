@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', RegisterController::class);
 Route::post('login', LoginController::class);
-Route::post('request/password-reset', [RequestPasswordResetController::class, 'sendResetLinkEmail'])->middleware('throttle:5,30');
+Route::post('request/password/reset', [RequestPasswordResetController::class, 'sendResetLinkEmail'])->middleware('throttle:5,30');
 Route::post('password/reset', [PasswordResetController::class, 'reset']);
 
 Route::middleware('api')->group(function () {
