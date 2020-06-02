@@ -13,8 +13,6 @@ class PeopleTableSeeder extends Seeder
 {
     public function run()
     {
-        factory(Source::class)->create();
-
         factory(Person::class, 10)->create()->each(function ($person) {
             factory(PersonImages::class, 3)->create([
                 'person_id' => $person->id,

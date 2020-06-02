@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\API\People;
 
 use App\Http\Controllers\Controller;
-use App\Models\Person;
 
-class ListPeopleController extends Controller
+class ListPeopleByCountryController extends Controller
 {
     public function __invoke()
     {
-        return Person::with('images')->paginate(8);
+        return 'Todo';
     }
 }

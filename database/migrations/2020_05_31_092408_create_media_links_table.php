@@ -17,7 +17,6 @@ class CreateMediaLinksTable extends Migration
             $table->string('link');
             $table->string('image_url')->nullable();
             $table->string('video_url')->nullable();
-            $table->foreign('source_id')->references('id')->on('sources');
             $table->foreign('person_id')->references('id')->on('people');
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
