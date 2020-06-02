@@ -5,11 +5,12 @@ namespace App\Http\Controllers\API\People;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PersonResource;
 use App\Models\Person;
+use Illuminate\Http\Request;
 
 class ListPeopleController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        return PersonResource::collection(Person::with('images')->paginate(8));
+        return PersonResource::collection(Person::filter($request->all())->with('images')->paginateFilter(8));
     }
 }
