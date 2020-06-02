@@ -23,4 +23,9 @@ class PersonFilter extends ModelFilter
     {
         return $this->where('city', $city);
     }
+
+    public function name($name)
+    {
+        return $this->where('full_name', 'LIKE', '%' . $name . '%');
+    }
 }
