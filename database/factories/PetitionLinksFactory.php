@@ -2,13 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\DonationLinks;
+use App\Models\PetitionLinks;
 use Faker\Generator as Faker;
 
-$factory->define(DonationLinks::class, function (Faker $faker) {
+$factory->define(PetitionLinks::class, function (Faker $faker) {
     return [
-        'title' => $faker->paragraph,
+        'title' => 'Lorem Ipsum Petition',
         'description' => $faker->paragraph,
         'link' => $faker->url,
+        'status' => 1
     ];
 });

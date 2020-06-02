@@ -7,10 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(MediaLinks::class, function (Faker $faker) {
     return [
-        'title' => $faker->text,
-        'description' => $faker->paragraph,
-        'link' => $faker->url,
-        'source_id' => 1,
+        'url' => $faker->url,
         'status' => 1
     ];
 });
