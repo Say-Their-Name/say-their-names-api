@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\API\Petitions;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PetitionResource;
 use App\Models\PetitionLinks;
 
 class GetSinglePetitionController extends Controller
 {
     public function __invoke($petition)
     {
-        return PetitionLinks::withPerson()->find($petition);
+        return new PetitionResource(PetitionLinks::with('person')->find($petition));
     }
 }
