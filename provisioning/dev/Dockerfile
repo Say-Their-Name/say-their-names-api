@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     npm install -g yarn
 
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl fileinfo soap gettext pdo_sqlite
+RUN docker-php-ext-install gd pdo_mysql mbstring zip exif pcntl fileinfo soap gettext pdo_sqlite
 
 WORKDIR /tmp
 
