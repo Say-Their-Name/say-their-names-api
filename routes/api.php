@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\Authentication\LoginController;
+use App\Http\Controllers\API\Authentication\RegisterController;
 use App\Http\Controllers\API\Donations\GetSingleDonationController;
 use App\Http\Controllers\API\Donations\ListDonationsController;
 use App\Http\Controllers\API\People\GetSinglePersonController;
@@ -10,7 +12,11 @@ use App\Http\Controllers\API\Petitions\GetSinglePetitionController;
 use App\Http\Controllers\API\Petitions\ListPetitionsController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('register', RegisterController::class);
+Route::post('login', LoginController::class);
+
 Route::middleware('api')->group(function () {
+
     Route::get('people', ListPeopleController::class);
     Route::get('people/{person}', GetSinglePersonController::class);
 
