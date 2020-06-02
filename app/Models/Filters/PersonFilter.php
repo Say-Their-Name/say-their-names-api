@@ -18,4 +18,9 @@ class PersonFilter extends ModelFilter
     {
         return $this->where('country', $country);
     }
+
+    public function city($city)
+    {
+        return $this->where('city', $city);
+    }
 }
