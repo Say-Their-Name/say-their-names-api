@@ -9,6 +9,6 @@ class GetSinglePersonController extends Controller
 {
     public function __invoke($person)
     {
-        return Person::complete()->find($person);
+        return response()->json(Person::complete()->find($person));
     }
 }
