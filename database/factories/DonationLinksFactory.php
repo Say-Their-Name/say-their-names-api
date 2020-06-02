@@ -10,5 +10,6 @@ $factory->define(DonationLinks::class, function (Faker $faker) {
         'title' => 'Lorem Ipsum Fund',
         'description' => $faker->paragraph,
         'link' => $faker->url,
+        'status' => 1,
     ];
 });
