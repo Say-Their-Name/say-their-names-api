@@ -115,8 +115,5 @@ http://localhost:8000/api/petitions/{id}
 ```
 
 ## TODO 
-1. Build an API For Searching Through People Model
-2. Build The Ability to Filter By Location On People Model
-3. Unit Test
 4. Admin Panel to manage the people
 
