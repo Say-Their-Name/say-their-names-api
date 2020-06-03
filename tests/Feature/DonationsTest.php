@@ -2,17 +2,16 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DonationsTest extends TestCase
 {
-    /**
-     * Test retrieving a Single Donation from the Donations API.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
+
     public function testGetSingleDonation()
     {
+        $this->seed();
         $donation_id = 2;
         $response = $this->get('/api/donations/' . $donation_id . '');
 
@@ -30,6 +29,7 @@ class DonationsTest extends TestCase
      */
     public function testGetAllDonations()
     {
+        $this->seed();
         $response = $this->get('/api/donations/');
 
         $response->assertSuccessful();
