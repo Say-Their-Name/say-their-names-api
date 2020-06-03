@@ -115,6 +115,27 @@ class PeopleTest extends TestCase
     }
 
     /**
+     * Test retrieving getting People filtered by country & city from the People API.
+     *
+     * @return void
+     */
+    public function testGetAllPeopleFilteredByCountryAndCity()
+    {
+        $country = 'United States';
+        $city = 'Tallahassee, FL';
+        $response = $this->get('/api/people/?country=' . $country . '&city=' . $city . '');
+
+        $response->assertSuccessful();
+
+        $response->assertJsonFragment(['country' => $country]);
+        $response->assertJsonFragment(['city' => $city]);
+        $response->assertJsonMissing(['country' => 'United Kingdom']);
+        $response->assertJsonMissing(['city' => 'Minnesota']);
+
+        $this->validatePeopleFoundJSONStructure($response);
+    }
+
+    /**
      * Test retrieving getting People filtered by name with an exact match from the People API.
      *
      * @return void
