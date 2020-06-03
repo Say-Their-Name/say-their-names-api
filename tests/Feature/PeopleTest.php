@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PeopleTest extends TestCase
@@ -79,7 +78,6 @@ class PeopleTest extends TestCase
 
         $this->validatePeopleNotFoundJSONStructure($response);
     }
-
 
     /**
      * Test retrieving getting People filtered by city from the People API.
