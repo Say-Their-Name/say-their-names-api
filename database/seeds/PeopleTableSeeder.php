@@ -22,9 +22,6 @@ class PeopleTableSeeder extends Seeder
             factory(DonationLinks::class)->create([
                 'person_id' => $person->id,
             ]);
-            factory(MediaLinks::class, 6)->create([
-                'person_id' => $person->id,
-            ]);
             factory(SocialMedia::class)->create([
                 'person_id' => $person->id,
             ]);
