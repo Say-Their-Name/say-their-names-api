@@ -6,11 +6,6 @@ use Tests\TestCase;
 
 class PeopleTest extends TestCase
 {
-    /**
-     * Test retrieving a Single Person from the People API.
-     *
-     * @return void
-     */
     public function testGetSinglePerson()
     {
         $person_id = '1';
