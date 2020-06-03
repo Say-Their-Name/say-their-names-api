@@ -6,11 +6,6 @@ use Tests\TestCase;
 
 class PeopleTest extends TestCase
 {
-    /**
-     * Test retrieving a Single Person from the People API.
-     *
-     * @return void
-     */
     public function testGetSinglePerson()
     {
         $response = $this->get('/api/people/1');
@@ -42,11 +37,6 @@ class PeopleTest extends TestCase
         );
     }
 
-    /**
-     * Test retrieving getting all People from the People API.
-     *
-     * @return void
-     */
     public function testGetAllPeople()
     {
         $response = $this->get('/api/people/');
@@ -88,11 +78,6 @@ class PeopleTest extends TestCase
         );
     }
 
-    /**
-     * Test retrieving a Single Person from the People API with an invalid ID
-     *
-     * @return void
-     */
     public function testGetSinglePersonNotFound()
     {
         $response = $this->get('/api/people/343432432432');
