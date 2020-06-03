@@ -4,13 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class PagesTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testBasicTest()
     {
         $response = $this->get('/');
@@ -18,11 +13,6 @@ class ExampleTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /**
-     * Test 404 for bogus URI.
-     *
-     * @return void
-     */
     public function testBogusURI()
     {
         $response = $this->get('/fod030u4j3nofw');
