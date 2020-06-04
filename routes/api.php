@@ -7,6 +7,7 @@ use App\Http\Controllers\API\Authentication\RequestPasswordResetController;
 use App\Http\Controllers\API\Donations\GetSingleDonationController;
 use App\Http\Controllers\API\Donations\ListDonationsController;
 use App\Http\Controllers\API\Donations\ListDonationTypesController;
+use App\Http\Controllers\API\JoinMailingListController;
 use App\Http\Controllers\API\People\GetSinglePersonController;
 use App\Http\Controllers\API\People\ListPeopleController;
 use App\Http\Controllers\API\People\SearchPeopleController;
@@ -32,4 +33,6 @@ Route::middleware('api')->group(function () {
     Route::get('petition-types', ListPetitionTypesController::class);
     Route::get('petitions', ListPetitionsController::class);
     Route::get('petitions/{petition}', GetSinglePetitionController::class);
+
+    Route::post('join/newsletter', JoinMailingListController::class);
 });
