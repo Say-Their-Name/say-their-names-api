@@ -1,3 +1,7 @@
+![Code Tests](https://github.com/Say-Their-Name/say-their-names-api/workflows/Code%20Tests/badge.svg)
+![Code Style](https://github.com/Say-Their-Name/say-their-names-api/workflows/Code%20Style/badge.svg)
+
+
 # Backend API
 
 **Live API can be found here:**  
