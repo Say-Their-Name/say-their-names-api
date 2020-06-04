@@ -18,7 +18,6 @@ class Person extends BaseModel
     use HasSocialMedia;
     use Filterable;
 
-
     public function images()
     {
         return $this->hasMany(PersonImages::class);

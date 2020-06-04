@@ -19,7 +19,6 @@ Route::post('request/password/reset', [RequestPasswordResetController::class, 's
 Route::post('password/reset', [PasswordResetController::class, 'reset']);
 
 Route::middleware('api')->group(function () {
-
     Route::get('people', ListPeopleController::class);
     Route::get('people/{person}', GetSinglePersonController::class);
     Route::get('people/search/{person}', SearchPeopleController::class);

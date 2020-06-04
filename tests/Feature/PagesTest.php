@@ -4,17 +4,19 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class PagesTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testBasicTest()
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
+    }
+
+    public function testBogusURI()
+    {
+        $response = $this->get('/fod030u4j3nofw');
+
+        $response->assertNotFound();
     }
 }
