@@ -32,7 +32,7 @@ class Person extends BaseModel
             'petitionLinks',
             'mediaLinks',
             'images',
-            'socialMedia'
+            'socialMedia',
         ]);
     }
 }

@@ -17,12 +17,12 @@ class PasswordResetController extends Controller
             'email' => [
                 'required',
                 'email',
-                'exists:users'
+                'exists:users',
             ],
             'password' => [
                 'required',
                 'confirmed',
-                'min:6'
+                'min:6',
             ],
         ];
     }
