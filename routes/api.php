@@ -4,6 +4,7 @@ use App\Http\Controllers\API\Authentication\LoginController;
 use App\Http\Controllers\API\Authentication\PasswordResetController;
 use App\Http\Controllers\API\Authentication\RegisterController;
 use App\Http\Controllers\API\Authentication\RequestPasswordResetController;
+use App\Http\Controllers\API\Bookmarks\ListBookmarksController;
 use App\Http\Controllers\API\Donations\GetSingleDonationController;
 use App\Http\Controllers\API\Donations\ListDonationsController;
 use App\Http\Controllers\API\Donations\ListDonationTypesController;
@@ -34,5 +35,7 @@ Route::middleware('api')->group(function () {
     Route::get('petitions', ListPetitionsController::class);
     Route::get('petitions/{petition}', GetSinglePetitionController::class);
 
+    Route::get('/bookmarks', ListBookmarksController::class);
+  
     Route::post('join/newsletter', JoinMailingListController::class);
 });

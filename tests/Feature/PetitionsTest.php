@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class PetitionsTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Test retrieving a Single Petition from the Petitions API.
      *
@@ -54,9 +58,9 @@ class PetitionsTest extends TestCase
     }
 
     /**
-     * @param \Illuminate\Testing\TestResponse $response
+     * @param TestResponse $response
      */
-    private function validatePetitionJSONStructure(\Illuminate\Testing\TestResponse $response): void
+    private function validatePetitionJSONStructure(TestResponse $response): void
     {
         $response->assertJsonStructure(
             [
@@ -72,9 +76,9 @@ class PetitionsTest extends TestCase
     }
 
     /**
-     * @param \Illuminate\Testing\TestResponse $response
+     * @param TestResponse $response
      */
-    private function validatePetitionsFoundJSONStructure(\Illuminate\Testing\TestResponse $response): void
+    private function validatePetitionsFoundJSONStructure(TestResponse $response): void
     {
         $response->assertJsonStructure(
             [
