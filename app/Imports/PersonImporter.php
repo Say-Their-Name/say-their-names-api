@@ -21,6 +21,22 @@ class PersonImporter implements ToModel, WithHeadingRow
             'context' => $row['context'],
             'status' => 1,
         ]);
+
+        $person->save();
+
+        foreach (explode(',', $row['images']) as $image) {
+            $person->images()->create([
+                'image_url' => $image,
+                'status' => 1
+            ]);
+        }
+
+        foreach (explode(',', $row['news_links']) as $image) {
+            $person->mediaLinks()->create([
+                'url' => $image,
+                'status' => 1
+            ]);
+        }
         return $person;
     }
 }

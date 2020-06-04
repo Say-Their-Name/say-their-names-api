@@ -10,6 +10,6 @@ class GetSinglePersonController extends Controller
 {
     public function __invoke($person)
     {
-        return new PersonResource(Person::complete()->find($person));
+        return new PersonResource(Person::complete()->findOrFail($person));
     }
 }
