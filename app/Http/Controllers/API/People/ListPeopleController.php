@@ -11,8 +11,8 @@ class ListPeopleController extends Controller
 {
     public function __invoke(Request $request)
     {
-        // return PersonResource::collection(Person::filter($request->all())->with('images')->paginateFilter(Config::get('stn.pagination')));
-        return PersonResource::collection(Person::filter($request->all())->with('images')->paginateFilter(config('stn.pagination')));
+    
+        return PersonResource::collection(Person::filter($request->all())->with('images')->paginateFilter(config('stn.pagination', 10)));
 
     }
 }
