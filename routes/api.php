@@ -35,7 +35,9 @@ Route::middleware('api')->group(function () {
     Route::get('petitions', ListPetitionsController::class);
     Route::get('petitions/{petition}', GetSinglePetitionController::class);
 
-    Route::get('/bookmarks', ListBookmarksController::class);
-  
     Route::post('join/newsletter', JoinMailingListController::class);
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/bookmarks', ListBookmarksController::class);
 });
