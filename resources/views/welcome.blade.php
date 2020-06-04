@@ -34,6 +34,11 @@
         <code>
             https://saytheirnames.dev/api/donations/{id}
         </code>
+        <br>
+        <p>(Must be Authenticated)</p>
+        <code>
+            https://saytheirnames.dev/api/bookmarks
+        </code>
         <hr />
         <p>Authentication</p>
         <br>
