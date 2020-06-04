@@ -9,9 +9,9 @@ class SearchPeopleController extends Controller
 {
     public function __invoke($searchTerm)
     {
-        $data =  Person::query()
-            ->where('full_name', 'LIKE', "%{$searchTerm}%")
-            ->paginate(10);
-        return ($data);
+       $data =  Person::query()
+        ->where('full_name', 'LIKE', "%{$searchTerm}%") 
+        ->paginate(config('stn.pagination', 10));
+       return ($data);
     }
 }
