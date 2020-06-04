@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Traits\HasBookmarks;
 use App\Models\Traits\Unguarded;
 use App\Notifications\ForgotPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +13,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     use Unguarded;
+    use HasBookmarks;
 
     protected $hidden = [
         'password', 'remember_token',

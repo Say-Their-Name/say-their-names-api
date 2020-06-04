@@ -16,7 +16,7 @@ class RequestPasswordResetController extends Controller
             'email' => [
                 'required',
                 'email',
-                'exists:users'
+                'exists:users',
             ],
         ]);
     }

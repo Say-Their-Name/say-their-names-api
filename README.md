@@ -1,3 +1,6 @@
+![Code Tests](https://github.com/Say-Their-Name/say-their-names-api/workflows/Code%20Tests/badge.svg)
+
+
 # Backend API
 
 **Live API can be found here:**  
@@ -86,12 +89,19 @@ composer install
 // Generate an encryption key
 php artisan key:generate
 
+// Generate a JWT secret
+php artisan jwt:secret
+
 // Create database and insert 10 People for testing
 // Each Person has
 // 1 Donation Link
 // 1 Petition Link
 // 1 Media Articles
 // 1 Image
+// Test User
+// email: test-user@test.com
+// password: password
+// 2 Bookmarks
 php artisan migrate:fresh --seed
 
 // Run tests

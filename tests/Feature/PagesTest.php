@@ -13,7 +13,7 @@ class PagesTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testBogusURI()
+    public function testNotFoundEndpoint()
     {
         $response = $this->get('/fod030u4j3nofw');
 

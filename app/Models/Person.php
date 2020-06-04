@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasBookmarks;
 use App\Models\Traits\HasDonations;
 use App\Models\Traits\HasMedia;
 use App\Models\Traits\HasPetitions;
@@ -16,6 +17,7 @@ class Person extends BaseModel
     use HasDonations;
     use HasMedia;
     use HasSocialMedia;
+    use HasBookmarks;
     use Filterable;
 
     public function images()
@@ -30,7 +32,7 @@ class Person extends BaseModel
             'petitionLinks',
             'mediaLinks',
             'images',
-            'socialMedia'
+            'socialMedia',
         ]);
     }
 }

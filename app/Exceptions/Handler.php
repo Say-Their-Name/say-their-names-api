@@ -25,8 +25,8 @@ class Handler extends ExceptionHandler
                 'data' => [
                     'status' => 'failed',
                     'data' => null,
-                    'message' => 'Not Found'
-                ]
+                    'message' => 'Not Found',
+                ],
             ]);
         }
         return parent::render($request, $exception);
