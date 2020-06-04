@@ -14,6 +14,7 @@ class PetitionResource extends JsonResource
             'description' => $this->description,
             'link' => $this->link,
             'person' => new PersonResource($this->whenLoaded('person')),
+            'type' => new PetitionLinkTypesResource($this->whenLoaded('type')),
         ];
     }
 }

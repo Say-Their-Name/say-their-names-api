@@ -14,6 +14,7 @@ class DonationResource extends JsonResource
             'description' => $this->description,
             'link' => $this->link,
             'person' => new PersonResource($this->whenLoaded('person')),
+            'type' => new DonationLinkTypesResource($this->whenLoaded('type')),
         ];
     }
 }

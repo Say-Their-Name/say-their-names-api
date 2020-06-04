@@ -6,8 +6,8 @@ use App\Models\Statics\DonationLinkTypes;
 
 trait HasDonationType
 {
-    public function donationType()
+    public function type()
     {
-        return $this->belongsTo(DonationLinkTypes::class);
+        return $this->belongsTo(DonationLinkTypes::class, 'type_id');
     }
 }

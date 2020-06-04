@@ -2,12 +2,14 @@
 
 namespace App\Models\Statics;
 
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Sushi\Sushi;
 
 class PetitionLinkTypes extends Model
 {
     use Sushi;
+    use Filterable;
 
     const FOR_VICTIMS = 1;
     const FOR_POLICY = 2;
