@@ -13,6 +13,8 @@ class PetitionsTest extends TestCase
      */
     public function testGetSinglePetition()
     {
+        $this->seed();
+
         $petition_id = 1;
         $response = $this->get('/api/petitions/' . $petition_id . '');
 
@@ -30,6 +32,8 @@ class PetitionsTest extends TestCase
      */
     public function testGetAllPetitions()
     {
+        $this->seed();
+
         $response = $this->get('/api/petitions/');
 
         $response->assertSuccessful();
@@ -46,7 +50,7 @@ class PetitionsTest extends TestCase
     {
         $response = $this->get('/api/petitions/343432432432');
 
-        $response->assertStatus(500);
+        $response->assertJsonFragment(['message' => "Not Found"]);
     }
 
     /**

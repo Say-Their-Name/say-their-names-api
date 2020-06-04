@@ -46,7 +46,7 @@ class DonationsTest extends TestCase
     {
         $response = $this->get('/api/donations/908902432');
 
-        $response->assertStatus(500);
+        $response->assertJsonFragment(['message' => "Not Found"]);
     }
 
     /**
