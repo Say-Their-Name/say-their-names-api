@@ -13,7 +13,7 @@ class DonationResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'link' => $this->link,
-            'person' => new PersonResource($this->whenLoaded('person'))
+            'person' => new PersonResource($this->whenLoaded('person')),
         ];
     }
 }

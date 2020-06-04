@@ -11,13 +11,12 @@ class LoginController extends Controller
 {
     public function __invoke(LoginRequest $request)
     {
-        $credentials = $request->only('email', 'password');
-
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
+            $token = JWTAuth::attempt($request->only('email', 'password'));
+            if (! $token) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
-        } catch (JWTException $e) {
+        } catch (JWTException $error) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 

@@ -10,7 +10,8 @@ class CreateDonationLinksTable extends Migration
     {
         Schema::create('donation_links', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('person_id');
+            $table->unsignedBigInteger('person_id')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
             $table->string('title');
             $table->text('description');
             $table->string('link');
