@@ -2,12 +2,16 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PeopleTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testGetSinglePerson()
     {
+        $this->seed();
         $person_id = '1';
         $response = $this->get('/api/people/' . $person_id . '');
 
@@ -26,6 +30,7 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeople()
     {
+        $this->seed();
         $response = $this->get('/api/people/');
 
         $response->assertSuccessful();
@@ -42,7 +47,7 @@ class PeopleTest extends TestCase
     {
         $response = $this->get('/api/people/343432432432');
 
-        $response->assertStatus(500);
+        $response->assertJsonFragment(['message' => "Not Found"]);
     }
 
     /**
@@ -52,6 +57,8 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByCountry()
     {
+        $this->seed();
+
         $country = 'United Kingdom';
         $response = $this->get('/api/people?country=' . $country . '');
 
@@ -70,6 +77,8 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleNotFoundFilteredByCountry()
     {
+        $this->seed();
+
         $response = $this->get('/api/people/?country=fjdajsfkldajffda');
 
         $response->assertSuccessful();
@@ -86,6 +95,8 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByCity()
     {
+        $this->seed();
+
         $city = 'London';
         $response = $this->get('/api/people/?city=' . $city . '');
 
@@ -104,6 +115,8 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleNotFoundFilteredByCity()
     {
+        $this->seed();
+
         $response = $this->get('/api/people/?city=fjdajsfkldajffda');
 
         $response->assertSuccessful();
@@ -120,6 +133,8 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByCountryAndCity()
     {
+        $this->seed();
+
         $country = 'United States';
         $city = 'Tallahassee, FL';
         $response = $this->get('/api/people/?country=' . $country . '&city=' . $city . '');
@@ -141,6 +156,8 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByNameExactMatch()
     {
+        $this->seed();
+
         $name = 'Sandra Bland';
         $response = $this->get('/api/people/?name=' . $name . '');
 
@@ -159,6 +176,8 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByNamePartialMatch()
     {
+        $this->seed();
+
         $response = $this->get('/api/people/?name=Sa');
 
         $response->assertSuccessful();
