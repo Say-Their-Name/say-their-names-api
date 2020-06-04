@@ -10,6 +10,6 @@ class ListDonationsController extends Controller
 {
     public function __invoke()
     {
-        return DonationResource::collection(DonationLinks::with('person')->paginate(8));
+        return DonationResource::collection(DonationLinks::with('person')->paginate());
     }
 }

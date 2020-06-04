@@ -10,6 +10,6 @@ class ListPetitionsController extends Controller
 {
     public function __invoke()
     {
-        return PetitionResource::collection(PetitionLinks::with('person')->paginate(8));
+        return PetitionResource::collection(PetitionLinks::with('person')->paginate());
     }
 }
