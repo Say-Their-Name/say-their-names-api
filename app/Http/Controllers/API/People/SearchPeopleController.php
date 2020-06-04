@@ -11,7 +11,7 @@ class SearchPeopleController extends Controller
     {
        $data =  Person::query()
         ->where('full_name', 'LIKE', "%{$searchTerm}%") 
-        ->paginate(env('PAGINATION', 10) );
+        ->paginate(config('stn.pagination') );
         return ($data);
     }
 }
