@@ -24,4 +24,22 @@ class PetitionLinkTypes extends Model
             'type' => 'Legal and Policy',
         ],
     ];
+
+    public static function fromName($name)
+    {
+        $linkType = null;
+
+        switch (strtoupper($name)) {
+            case "VICTIMS":
+                $linkType = PetitionLinkTypes::FOR_VICTIMS;
+                break;
+            case "POLICY":
+                $linkType = PetitionLinkTypes::FOR_POLICY;
+                break;
+            default:
+                $linkType = "";
+        }
+
+        return $linkType;
+    }
 }
