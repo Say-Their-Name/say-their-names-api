@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 use App\Models\DonationLinks;
 use App\Models\Person;
 use App\Models\PetitionLinks;
-use Illuminate\Http\Request;
 use Spatie\Searchable\Search;
 
 class SearchController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(SearchRequest $request)
     {
         $results = (new Search())
             ->registerModel(Person::class, ['full_name'])

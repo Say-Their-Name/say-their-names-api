@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\Bookmarks\ListBookmarksController;
 use App\Http\Controllers\API\Donations\GetSingleDonationController;
 use App\Http\Controllers\API\Donations\ListDonationsController;
 use App\Http\Controllers\API\Donations\ListDonationTypesController;
