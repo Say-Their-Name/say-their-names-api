@@ -2,9 +2,9 @@
 
 namespace App\Models\Statics;
 
+use App\Utils\TypeUtils;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Sushi\Sushi;
 
 class DonationLinkTypes extends Model
@@ -19,39 +19,21 @@ class DonationLinkTypes extends Model
     const MOVEMENT = 3;
     const MOVEMENT_TYPE = 'Movement';
 
-    protected $rows = [
-        [
-            'id' => self::VICTIMS,
-            'type' => self::VICTIMS_TYPE,
-        ],
-        [
-            'id' => self::PROTESTERS,
-            'type' => self::PROTESTERS_TYPE,
-        ],
-        [
-            'id' => self::MOVEMENT,
-            'type' => self::MOVEMENT_TYPE,
-        ],
+    const TYPES = [
+        self::VICTIMS_TYPE => self::VICTIMS,
+        self::PROTESTERS_TYPE => self::PROTESTERS,
+        self::MOVEMENT_TYPE => self::MOVEMENT
     ];
+
+    protected $rows;
 
     public static function fromName($name)
     {
-        $linkType = null;
+        return TypeUtils::getTypeId($name, self::TYPES);
+    }
 
-        switch (strtoupper($name)) {
-            case Str::upper(self::VICTIMS_TYPE):
-                $linkType = DonationLinkTypes::VICTIMS;
-                break;
-            case Str::upper(self::PROTESTERS_TYPE):
-                $linkType = DonationLinkTypes::PROTESTERS;
-                break;
-            case Str::upper(self::MOVEMENT_TYPE):
-                $linkType = DonationLinkTypes::MOVEMENT;
-                break;
-            default:
-                $linkType = "";
-        }
-
-        return $linkType;
+    public static function getRows()
+    {
+        return TypeUtils::typeMapToRows(self::TYPES);
     }
 }
