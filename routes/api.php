@@ -24,7 +24,7 @@ Route::post('password/reset', [PasswordResetController::class, 'reset']);
 
 Route::middleware('api')->group(function () {
     Route::get('people', ListPeopleController::class);
-    Route::get('people/{person}', GetSinglePersonController::class);
+    Route::get('people/{slug}', GetSinglePersonController::class);
     Route::get('people/search/{person}', SearchPeopleController::class);
 
     Route::get('donation-types', ListDonationTypesController::class);

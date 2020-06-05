@@ -10,6 +10,9 @@ class GetSinglePersonController extends Controller
 {
     public function __invoke($person)
     {
-        return new PersonResource(Person::complete()->findOrFail($person));
+        return new PersonResource(
+            Person::complete()
+                ->where('identifier', $person)->first()
+        );
     }
 }
