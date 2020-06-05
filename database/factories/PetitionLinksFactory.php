@@ -10,6 +10,8 @@ $factory->define(PetitionLinks::class, function (Faker $faker) {
         'title' => 'Lorem Ipsum Petition',
         'description' => $faker->paragraph,
         'link' => $faker->url,
+        'outcome' => $faker->paragraph,
+        'image_url' => $faker->imageUrl(),
         'status' => 1
     ];
 });

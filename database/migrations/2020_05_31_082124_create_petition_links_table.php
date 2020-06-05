@@ -14,6 +14,8 @@ class CreatePetitionLinksTable extends Migration
             $table->unsignedBigInteger('type_id')->nullable();
             $table->string('title');
             $table->text('description');
+            $table->text('outcome')->nullable();
+            $table->string('image_url')->nullable();
             $table->string('link');
             $table->foreign('person_id')->references('id')->on('people');
             $table->smallInteger('status')->default(0);
