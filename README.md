@@ -161,7 +161,5 @@ http://localhost:8000/api/petitions?type=victims
 
 Filter by Person
 http://localhost:8000/api/petitions?name=george-floyd
-
-
 ```
 
