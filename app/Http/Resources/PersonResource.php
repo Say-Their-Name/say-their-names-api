@@ -18,7 +18,7 @@ class PersonResource extends JsonResource
             'age' => $this->age,
             'city' => $this->city,
             'country' => $this->country,
-            'their_story' => $this->biography,
+            'their_story' => $this->context,
             'outcome' => $this->outcome,
             'context' => $this->context,
             'images' => $this->images,
