@@ -115,18 +115,53 @@ php artisan serve
 
 ```
 GET People
+List all
 http://localhost:8000/api/people
-http://localhost:8000/api/people/{id}
+
+Get Single
+http://localhost:8000/api/people/{firstname-lastname}
+
+Filter by name
+http://localhost:8000/api/people?name=george-floyd
+
+Filter by country
+http://localhost:8000/api/people?country=united-states
+
+Filter by city
+http://localhost:8000/api/people?city=minnesota
 
 GET Donations
+List Types
+http://localhost:8000/api/donation-types
+
+List all
 http://localhost:8000/api/donations
+
+Get Single
 http://localhost:8000/api/donations/{id}
 
-GET Petitions
-http://localhost:8000/api/petitions
-http://localhost:8000/api/petitions/{id}
-```
+Filter by Type
+http://localhost:8000/api/donations?type=victims
 
-## TODO 
-4. Admin Panel to manage the people
+Filter by Victim
+http://localhost:8000/api/donations?name=george-floyd
+
+GET Petitions
+List Types
+http://localhost:8000/api/petition-types
+
+List All
+http://localhost:8000/api/petitions
+
+Get Single
+http://localhost:8000/api/petitions/{id}
+
+Filter by Type
+http://localhost:8000/api/petitions?type=victims
+
+Filter by Person
+http://localhost:8000/api/petitions?name=george-floyd
+
+
+```
 
