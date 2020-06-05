@@ -11,7 +11,7 @@ services:
       - PHP_IDE_CONFIG=serverName=docker
       - HOST_IP=${HOST_IP}
     depends_on:
-      # - db
+      - db
       - redis
     volumes:
       - ./:/var/www/html
@@ -49,26 +49,28 @@ services:
   #      - ./:/var/www/html
   #    command: ['php', 'artisan', 'horizon']
 
-  #  adminer:
-  #    image: adminer
-  #    depends_on:
-  #      - db
-  #    environment:
-  #      - ADMINER_DEFAULT_SERVER=db
-  #    volumes:
-  #      - ./provisioning/adminer.css:/var/www/html/adminer.css
+  db:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=stn
+      - MYSQL_USER=stn
+      - MYSQL_PASSWORD=stn
+    volumes:
+      - mysql-storage:/var/lib/mysql
+    ports:
+      - 49306:3306
 
-  #  db:
-  #    image: mysql:8
-  #    environment:
-  #      - MYSQL_ROOT_PASSWORD=secret
-  #      - MYSQL_DATABASE=platform
-  #    volumes:
-  #      - mysql-storage:/var/lib/mysql
-  #    ports:
-  #      - 49306:3306
+  adminer:
+    image: adminer
+    ports:
+      - "48080:8080"
+    depends_on:
+      - db
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+    volumes:
+      - ./provisioning/adminer.css:/var/www/html/adminer.css
 
-
-#volumes:
-#  mysql-storage:
-#  mongo-storage:
+volumes:
+  mysql-storage:
