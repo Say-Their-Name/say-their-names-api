@@ -9,6 +9,8 @@ use App\Models\Traits\HasPetitions;
 use App\Models\Traits\HasSocialMedia;
 use App\Models\Traits\Unguarded;
 use EloquentFilter\Filterable;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Person extends BaseModel
 {
@@ -19,6 +21,7 @@ class Person extends BaseModel
     use HasSocialMedia;
     use HasBookmarks;
     use Filterable;
+    use HasSlug;
 
     public function images()
     {
@@ -34,5 +37,12 @@ class Person extends BaseModel
             'images',
             'socialMedia',
         ]);
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('full_name')
+            ->saveSlugsTo('identifier');
     }
 }
