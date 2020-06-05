@@ -4,6 +4,7 @@ namespace App\Models\Statics;
 
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Sushi\Sushi;
 
 class DonationLinkTypes extends Model
@@ -12,21 +13,24 @@ class DonationLinkTypes extends Model
     use Filterable;
 
     const VICTIMS = 1;
+    const VICTIMS_TYPE = 'Victims';
     const PROTESTERS = 2;
+    const PROTESTERS_TYPE = 'Protesters';
     const MOVEMENT = 3;
+    const MOVEMENT_TYPE = 'Movement';
 
     protected $rows = [
         [
             'id' => self::VICTIMS,
-            'type' => 'Victims',
+            'type' => self::VICTIMS_TYPE,
         ],
         [
             'id' => self::PROTESTERS,
-            'type' => 'Protesters',
+            'type' => self::PROTESTERS_TYPE,
         ],
         [
             'id' => self::MOVEMENT,
-            'type' => 'Movement',
+            'type' => self::MOVEMENT_TYPE,
         ],
     ];
 
@@ -35,13 +39,13 @@ class DonationLinkTypes extends Model
         $linkType = null;
 
         switch (strtoupper($name)) {
-            case "VICTIMS":
+            case Str::upper(self::VICTIMS_TYPE):
                 $linkType = DonationLinkTypes::VICTIMS;
                 break;
-            case "PROTESTERS":
+            case Str::upper(self::PROTESTERS_TYPE):
                 $linkType = DonationLinkTypes::PROTESTERS;
                 break;
-            case "MOVEMENT":
+            case Str::upper(self::MOVEMENT_TYPE):
                 $linkType = DonationLinkTypes::MOVEMENT;
                 break;
             default:

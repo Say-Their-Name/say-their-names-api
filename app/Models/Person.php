@@ -23,6 +23,8 @@ class Person extends BaseModel
     use Filterable;
     use HasSlug;
 
+    const SLUG = 'identifier';
+
     public function images()
     {
         return $this->hasMany(PersonImages::class);
@@ -43,6 +45,6 @@ class Person extends BaseModel
     {
         return SlugOptions::create()
             ->generateSlugsFrom('full_name')
-            ->saveSlugsTo('identifier');
+            ->saveSlugsTo(self::SLUG);
     }
 }

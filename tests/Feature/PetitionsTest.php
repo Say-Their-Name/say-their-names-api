@@ -66,7 +66,7 @@ class PetitionsTest extends TestCase
     }
 
     /**
-     * Test retrieving getting Petitions filtered by type when found from the Donation API.
+     * Test retrieving getting Petitions filtered by type when found from the Petition API.
      *
      * @return void
      */
@@ -77,6 +77,20 @@ class PetitionsTest extends TestCase
         $response->assertSuccessful();
 
         $response->assertJsonFragment(['total' => 0]);
+
+        $this->validatePetitionsNotFoundJSONStructure($response);
+    }
+
+    public function testGetAllPetitionsFilteredByName()
+    {
+        $this->seed();
+        $name = 'george-floyd';
+        $response = $this->get('/api/donations/?name=' . $name . '');
+
+        $response->assertSuccessful();
+
+        $response->assertJsonFragment(['identifier' => $name]);
+        $response->assertJsonMissing(['identifier' => 'tony-mcdade']);
 
         $this->validatePetitionsNotFoundJSONStructure($response);
     }

@@ -16,7 +16,7 @@
         </code>
         <br>
         <code>
-            https://saytheirnames.dev/api/people/{id}
+            https://saytheirnames.dev/api/people/{first-last}
         </code>
         <br>
         <code>

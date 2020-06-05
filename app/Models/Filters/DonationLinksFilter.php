@@ -2,11 +2,15 @@
 
 namespace App\Models\Filters;
 
+use App\Models\Filters\Traits\FilterableByPerson;
+use App\Models\Person;
 use App\Models\Statics\DonationLinkTypes;
 use EloquentFilter\ModelFilter;
 
 class DonationLinksFilter extends ModelFilter
 {
+    use FilterableByPerson;
+
     public $relations = [];
 
     public function type($type)

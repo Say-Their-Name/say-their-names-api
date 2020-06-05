@@ -58,6 +58,21 @@ class DonationsTest extends TestCase
         $this->validateDonationsFoundJSONStructure($response);
     }
 
+    public function testGetAllDonationsFilteredByPerson()
+    {
+        $this->seed();
+
+        $name = 'george-floyd';
+        $response = $this->get('/api/donations/?name=' . $name . '');
+
+        $response->assertSuccessful();
+
+        $response->assertJsonFragment(['identifier' => $name]);
+        $response->assertJsonMissing(['identifier' => 'tony-mcdade']);
+
+        $this->validateDonationsFoundJSONStructure($response);
+    }
+
     /**
      * Test retrieving getting Donation filtered by type when found from the Donation API.
      *
