@@ -63,7 +63,7 @@ class DonationsTest extends TestCase
      *
      * @return void
      */
-    public function testGetAllPeopleNotFoundFilteredByName()
+    public function testGetAllDonationsNotFoundFilteredByType()
     {
         $response = $this->get('/api/donations/?type=random');
 
