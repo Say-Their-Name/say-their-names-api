@@ -15,7 +15,7 @@ class TypeUtils
         return array_key_exists($key, $types) ? $types[$key] : "";
     }
 
-    public static function typeMapToRows($types): array
+    public static function typeMapToRows(array $types): array
     {
         $rows = [];
         foreach ($types as $key => $value) {

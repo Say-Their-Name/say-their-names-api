@@ -19,7 +19,7 @@ class PetitionLinkTypes extends Model
 
     const TYPES = [
         self::FOR_VICTIM_TYPE => self::FOR_VICTIMS,
-        self::FOR_POLICY => self::FOR_POLICY
+        self::FOR_POLICY_TYPE => self::FOR_POLICY
     ];
 
     protected $rows;
