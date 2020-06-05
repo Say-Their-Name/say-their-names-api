@@ -29,4 +29,25 @@ class DonationLinkTypes extends Model
             'type' => 'Movement',
         ],
     ];
+
+    public static function fromName($name)
+    {
+        $linkType = null;
+
+        switch (strtolower($name)) {
+            case "victims":
+                $linkType = DonationLinkTypes::VICTIMS;
+                break;
+            case "protesters":
+                $linkType = DonationLinkTypes::PROTESTERS;
+                break;
+            case "movement":
+                $linkType = DonationLinkTypes::MOVEMENT;
+                break;
+            default:
+                $linkType = "";
+        }
+
+        return $linkType;
+    }
 }
