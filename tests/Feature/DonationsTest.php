@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class DonationsTest extends TestCase
@@ -38,6 +39,42 @@ class DonationsTest extends TestCase
     }
 
     /**
+     * Test retrieving getting Donations filtered by type from the Donations API.
+     *
+     * @return void
+     */
+    public function testGetAllDonationsFilteredByType()
+    {
+        $this->seed();
+
+        $type = 'Victims';
+        $response = $this->get('/api/donations/?type=' . $type . '');
+
+        $response->assertSuccessful();
+
+        $response->assertJsonFragment(['type' => $type]);
+        $response->assertJsonMissing(['type' => 'Movement']);
+
+        $this->validateDonationsFoundJSONStructure($response);
+    }
+
+    /**
+     * Test retrieving getting Donation filtered by type when found from the Donation API.
+     *
+     * @return void
+     */
+    public function testGetAllDonationsNotFoundFilteredByType()
+    {
+        $response = $this->get('/api/donations/?type=random');
+
+        $response->assertSuccessful();
+
+        $response->assertJsonFragment(['total' => 0]);
+
+        $this->validateDonationsNotFoundJSONStructure($response);
+    }
+
+    /**
      * Test retrieving a Single Donation from the Donations API with an invalid ID
      *
      * @return void
@@ -50,9 +87,9 @@ class DonationsTest extends TestCase
     }
 
     /**
-     * @param \Illuminate\Testing\TestResponse $response
+     * @param TestResponse $response
      */
-    private function validateDonationJSONStructure(\Illuminate\Testing\TestResponse $response): void
+    private function validateDonationJSONStructure(TestResponse $response): void
     {
         $response->assertJsonStructure(
             [
@@ -68,9 +105,9 @@ class DonationsTest extends TestCase
     }
 
     /**
-     * @param \Illuminate\Testing\TestResponse $response
+     * @param TestResponse $response
      */
-    private function validateDonationsFoundJSONStructure(\Illuminate\Testing\TestResponse $response): void
+    private function validateDonationsFoundJSONStructure(TestResponse $response): void
     {
         $response->assertJsonStructure(
             [
@@ -84,6 +121,33 @@ class DonationsTest extends TestCase
                     ]
 
                 ],
+                'links' => [
+                    'first',
+                    'last',
+                    'prev',
+                    'next'
+                ],
+                'meta' => [
+                    'current_page',
+                    'from',
+                    'last_page',
+                    'path',
+                    'per_page',
+                    'to',
+                    'total'
+                ]
+            ]
+        );
+    }
+
+    /**
+     * @param TestResponse $response
+     */
+    private function validateDonationsNotFoundJSONStructure(TestResponse $response): void
+    {
+        $response->assertJsonStructure(
+            [
+                'data' => [],
                 'links' => [
                     'first',
                     'last',
