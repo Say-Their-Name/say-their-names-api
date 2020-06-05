@@ -34,14 +34,14 @@ class DonationLinkTypes extends Model
     {
         $linkType = null;
 
-        switch (strtolower($name)) {
-            case "victims":
+        switch (strtoupper($name)) {
+            case "VICTIMS":
                 $linkType = DonationLinkTypes::VICTIMS;
                 break;
-            case "protesters":
+            case "PROTESTERS":
                 $linkType = DonationLinkTypes::PROTESTERS;
                 break;
-            case "movement":
+            case "MOVEMENT":
                 $linkType = DonationLinkTypes::MOVEMENT;
                 break;
             default:
