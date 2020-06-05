@@ -1,0 +1,147 @@
+swagger: "2.0"
+info:
+  description: "This is a Swagger Docs for Say Their Name API.  See more here: https://github.com/Say-Their-Name/api"
+  version: "1.0.0"
+  title: "Say Their Name API"
+  
+host: "saytheirnames.dev"
+basePath: "/api"
+
+schemes:
+- "https"
+paths:
+ /people:
+    get:
+        tags:
+        - "people"
+        summary: "Get People"
+        description: ""
+        consumes:
+        - "application/json"
+        produces:
+        - "application/json"
+        responses:
+            "405":
+                description: "Invalid input"
+            "200":
+                description: "Valid Data"
+ /people/{id}:
+    get:
+        tags:
+        - "people by id"
+        summary: "Get Person By ID"
+        description: "Get Person By ID"
+        consumes:
+        - "application/json"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of Person to return"
+          required: true
+          type: "integer"
+          format: "int64"
+        responses:
+            "405":
+                description: "Invalid input"
+            "200":
+                description: "Valid Data"
+ /people/search/{term}:
+        get:
+            tags:
+            - "search for a term in person's name"
+            summary: "Get Person By ID"
+            description: "Get Person By ID"
+            consumes:
+            - "application/json"
+            produces:
+            - "application/json"
+            parameters:
+              - name: "term"
+                in: "path"
+                description: "ID of Person to return"
+                required: true
+                type: "integer"
+                format: "int64"
+            responses:
+                "405":
+                    description: "Invalid input"
+                "200":
+                    description: "Valid Data"
+ /petitions:
+    get:
+        tags:
+        - "petitions"
+        summary: "Get Petitions"
+        description: "List of Petitions"
+        consumes:
+        - "application/json"
+        produces:
+        - "application/json"
+        responses:
+          "405":
+              description: "Invalid input"
+          "200":
+              description: "Valid Data"  
+
+ /petitions/{id}:
+        get:
+            tags:
+            - "petitions by id"
+            summary: "Get Petitions By ID"
+            description: ""
+            consumes:
+            - "application/json"
+            produces:
+            - "application/json"
+            parameters:
+              - name: "id"
+                in: "path"
+                description: "ID of Petition to return"
+                required: true
+                type: "integer"
+                format: "int64"
+            responses:
+                "405":
+                    description: "Invalid input"
+                "200":
+                    description: "Valid Data"            
+ /donations:
+      get:
+        tags:
+        - "donations"
+        summary: "Get Donations"
+        description: "List of Donations"
+        consumes:
+         - "application/json"
+        produces:
+         - "application/json"
+        responses:
+            "405":
+                description: "Invalid input"
+            "200":
+                description: "Valid Data"  
+
+ /donations/{id}:
+   get:
+    tags:
+    - "donation by id"
+    summary: "Get donation by ID"
+    description: ""
+    consumes:
+    - "application/json"
+    produces:
+    - "application/json"
+    parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of donations to return"
+          required: true
+          type: "integer"
+          format: "int64"
+    responses:
+        "405":
+            description: "Invalid input"
+        "200":
+            description: "Valid Data"              
