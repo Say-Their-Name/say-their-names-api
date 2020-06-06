@@ -8,85 +8,54 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1>Say Their Names API</h1>
-        <p> Available Links</p>
+    <pre>
+    GET People
+    List all
+    https://saytheirnames.dev/api/people
 
-        <code>
-            https://saytheirnames.dev/api/people
-        </code>
-        <br>
-        <code>
-            https://saytheirnames.dev/api/people/{id}
-        </code>
-        <br>
-        <code>
-            https://saytheirnames.dev/api/petitions
-        </code>
-        <br>
-        <code>
-            https://saytheirnames.dev/api/petitions/{id}
-        </code>
-        <br>
-        <code>
-            https://saytheirnames.dev/api/donations
-        </code>
-        <br>
-        <code>
-            https://saytheirnames.dev/api/donations/{id}
-        </code>
-        <br>
-        <p>(Must be Authenticated)</p>
-        <code>
-            https://saytheirnames.dev/api/bookmarks
-        </code>
-        <hr />
-        <p>Authentication</p>
-        <br>
-        <code>
-            https://saytheirnames.dev/api/login
-        </code>
-        <pre>
-            <br>
-            email *
-            <br>
-            password *
-        </pre>
-        <br>
-        <code>
-            https://saytheirnames.dev/api/register
-        </code>
-        <pre>
-            <br>
-            name *
-            <br>
-            email *
-            <br>
-            password *
-            <br>
-            password_confirmation *
-        </pre>
-        <br>
-        <code>
-            https://saytheirnames.dev/api/request/password-reset
-        </code>
-        <pre>
-            <br>
-            email *
-        </pre>
-        <br>
-        <code>
-            https://saytheirnames.dev/api/password/reset
-        </code>
-        <pre>
-            <br>
-            token *
-            <br>
-            email *
-            <br>
-            password *
-            <br>
-            password_confirmation *
-        </pre>
-        <hr />
+    Get Single
+    https://saytheirnames.dev/api/people/{firstname-lastname}
+
+    Filter by name
+    https://saytheirnames.dev/api/people?name=george-floyd
+
+    Filter by country
+    https://saytheirnames.dev/api/people?country=united-states
+
+    Filter by city
+    https://saytheirnames.dev/api/people?city=minnesota
+
+    GET Donations
+    List Types
+    https://saytheirnames.dev/api/donation-types
+
+    List all
+    https://saytheirnames.dev/api/donations
+
+    Get Single
+    https://saytheirnames.dev/api/donations/{id}
+
+    Filter by Type
+    https://saytheirnames.dev/api/donations?type=victims
+
+    Filter by Victim
+    https://saytheirnames.dev/api/donations?name=george-floyd
+
+    GET Petitions
+    List Types
+    https://saytheirnames.dev/api/petition-types
+
+    List All
+    https://saytheirnames.dev/api/petitions
+
+    Get Single
+    https://saytheirnames.dev/api/petitions/{id}
+
+    Filter by Type
+    https://saytheirnames.dev/api/petitions?type=victims
+
+    Filter by Person
+    https://saytheirnames.dev/api/petitions?name=george-floyd
+    </pre>
     </body>
 </html>

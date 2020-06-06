@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Person;
+use App\Models\Statics\PetitionLinkTypes;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -37,6 +38,22 @@ class PersonImporter implements ToModel, WithHeadingRow
                 'status' => 1,
             ]);
         }
+
+        foreach (explode(',', $row['petition_links']) as $petition) {
+            if ($petition == '') {
+                continue;
+            }
+            $person->petitionLinks()->create([
+                'title' => "Petition For $person->full_name",
+                'description' => "Help bring justice to $person->full_name by signing this petition",
+                'link' => $petition,
+                'outcome' => null,
+                'image_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'status' => 1,
+                'type_id' => PetitionLinkTypes::FOR_VICTIMS,
+            ]);
+        }
+
         return $person;
     }
 }

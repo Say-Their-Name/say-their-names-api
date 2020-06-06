@@ -9,10 +9,12 @@ use App\Models\Traits\HasPetitions;
 use App\Models\Traits\HasSocialMedia;
 use App\Models\Traits\Unguarded;
 use EloquentFilter\Filterable;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Person extends BaseModel
+class Person extends BaseModel implements Searchable
 {
     use Unguarded;
     use HasPetitions;
@@ -22,6 +24,13 @@ class Person extends BaseModel
     use HasBookmarks;
     use Filterable;
     use HasSlug;
+
+    const SLUG = 'identifier';
+
+    public function getSearchResult(): SearchResult
+    {
+        return new SearchResult($this, $this->identifier);
+    }
 
     public function images()
     {
@@ -43,6 +52,6 @@ class Person extends BaseModel
     {
         return SlugOptions::create()
             ->generateSlugsFrom('full_name')
-            ->saveSlugsTo('identifier');
+            ->saveSlugsTo(self::SLUG);
     }
 }

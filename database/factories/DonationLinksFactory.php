@@ -10,6 +10,8 @@ $factory->define(DonationLinks::class, function (Faker $faker) {
         'title' => 'Lorem Ipsum Fund',
         'description' => $faker->paragraph,
         'link' => $faker->url,
+        'outcome' => $faker->paragraph,
+        'image_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
         'status' => 1,
     ];
 });

@@ -30,7 +30,7 @@ class GetSinglePersonController extends Controller
     {
         return new PersonResource(
             Person::complete()
-                ->where('identifier', $person)->first()
+                ->where('identifier', $person)->firstOrFail()
         );
     }
 }

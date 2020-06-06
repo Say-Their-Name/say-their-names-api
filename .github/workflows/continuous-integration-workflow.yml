@@ -1,0 +1,28 @@
+name: CI
+
+  on:
+    push:
+      branches: [ master ]
+    pull_request:
+      branches: [ master ]
+
+  jobs:
+    laravel-tests:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - uses: overtrue/phplint@master
+        - name: Copy ENV Laravel Configuration for CI
+          run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+        - name: Install Composer Dependencies (PHP vendors)
+          run: composer install
+        - name: Generate encryption key
+          run: php artisan key:generate
+        - name: Generate a JWT secret
+          run: php artisan jwt:secret
+        - name: Create DB and schemas
+          run: |
+            touch database/database.sqlite
+            php artisan migrate:fresh --seed
+        - name: Execute tests
+          run: php artisan test

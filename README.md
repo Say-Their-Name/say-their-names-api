@@ -1,7 +1,16 @@
 ![Code Tests](https://github.com/Say-Their-Name/say-their-names-api/workflows/Code%20Tests/badge.svg)
 
+# Say Their Names ✊🏿
 
-# Backend API
+## Overview
+
+Welcome to the Say Their Names project. Our aim is to build an open-source platform that raises awareness of the injustice and often forgotten names of racial inequality at the hands of law enforcement. We strive to identify and amplify verified organizations to ensure donations are reaching those who can make the most impact with it.
+
+## Contributing
+
+**We heartily welcome any and all contributions that match our engineering standards!**
+
+That being said, this codebase isn't your typical open source project because it's not a library or package with a limited scope—it's our entire product.
 
 **Live API can be found here:**  
 
@@ -46,87 +55,64 @@ task sh
 ```
 Go to http://localhost:8000
 
-### Initial setup,without Taskfile *(less recommended)*
-You can still avoid installing and using Taskfile,but it would make your life easier ;)  
-Anyway: 
-```
-# Build the development Docker image
-docker-compose build
+### Adminer (Web UI for MySQL DB)  
+It's accessible at http://localhost:48080  
+Login using the user/password from the .env.example (should be `stn`/`stn`)  
 
-# Start the stack
-docker-compose up
 
-# Install vendor dependencies
-docker-compose exec app composer install
-
-# Prepare the database
-docker-compose exec app php artisan migrate:fresh --seed
-
-# Run shell in the running container
-docker-compose exec app bash
-
-## from shell you can run composer, artisan, etc
-```
-Go to http://localhost:8000
-
-## Setup without Docker *(not recommended)*  
-This is the last resort setup. Normally using Docker is easier.  
-Also you're exposing yourself to inconsistencies.  
-That being said:  
-```bash
-git clone https://github.com/Say-Their-Name/api.git
-cd api
-
-// Copy Your Environment files
-cp .env.example .env
-
-// Create an SQLITE Database
-touch database/database.sqlite
-
-// Install Composer Dependancies
-composer install 
-
-// Generate an encryption key
-php artisan key:generate
-
-// Generate a JWT secret
-php artisan jwt:secret
-
-// Create database and insert 10 People for testing
-// Each Person has
-// 1 Donation Link
-// 1 Petition Link
-// 1 Media Articles
-// 1 Image
-// Test User
-// email: test-user@test.com
-// password: password
-// 2 Bookmarks
-php artisan migrate:fresh --seed
-
-// Run tests
-php artisan test
-
-// Run the application
-php artisan serve
-```
+---
+[Other (not recommended) ways to setup are available here](docs/install_alternatives.md)
 
 ## Endpoints Available
 
 ```
 GET People
+List all
 http://localhost:8000/api/people
-http://localhost:8000/api/people/{id}
+
+Get Single
+http://localhost:8000/api/people/{firstname-lastname}
+
+Filter by name
+http://localhost:8000/api/people?name=george-floyd
+
+Filter by country
+http://localhost:8000/api/people?country=united-states
+
+Filter by city
+http://localhost:8000/api/people?city=minnesota
 
 GET Donations
+List Types
+http://localhost:8000/api/donation-types
+
+List all
 http://localhost:8000/api/donations
+
+Get Single
 http://localhost:8000/api/donations/{id}
 
+Filter by Type
+http://localhost:8000/api/donations?type=victims
+
+Filter by Victim
+http://localhost:8000/api/donations?name=george-floyd
+
 GET Petitions
+List Types
+http://localhost:8000/api/petition-types
+
+List All
 http://localhost:8000/api/petitions
+
+Get Single
 http://localhost:8000/api/petitions/{id}
+
+Filter by Type
+http://localhost:8000/api/petitions?type=victims
+
+Filter by Person
+http://localhost:8000/api/petitions?name=george-floyd
 ```
 
-## TODO 
-4. Admin Panel to manage the people
-
+## Developer tooling
