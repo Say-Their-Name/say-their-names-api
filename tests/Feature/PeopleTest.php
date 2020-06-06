@@ -219,7 +219,6 @@ class PeopleTest extends TestCase
                     'age',
                     'city',
                     'country',
-                    'biography',
                     'context',
                     'images',
                     'donation_links',
@@ -247,7 +246,6 @@ class PeopleTest extends TestCase
                         'age',
                         'city',
                         'country',
-                        'biography',
                         'context',
                         'images'
                     ]
