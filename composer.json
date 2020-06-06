@@ -21,7 +21,8 @@
         "spatie/laravel-searchable": "^1.6",
         "spatie/laravel-sluggable": "^2.4",
         "tucker-eric/eloquentfilter": "^2.3",
-        "tymon/jwt-auth": "1.0.*"
+        "tymon/jwt-auth": "1.0.*",
+        "zircote/swagger-php": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
