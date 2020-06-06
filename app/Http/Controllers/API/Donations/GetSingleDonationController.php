@@ -10,6 +10,7 @@ class GetSingleDonationController extends Controller
 {
     public function __invoke($donation)
     {
-        return new DonationResource(DonationLinks::with(['person'])->findOrFail($donation));
+        return new DonationResource(DonationLinks::with(['person', 'hashTags'])
+            ->findOrFail($donation));
     }
 }

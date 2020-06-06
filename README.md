@@ -1,4 +1,4 @@
-![Code Tests](https://github.com/Say-Their-Name/say-their-names-api/workflows/Code%20Tests/badge.svg)
+![CI](https://github.com/Say-Their-Name/say-their-names-api/workflows/CI/badge.svg)
 
 # Say Their Names ✊🏿
 

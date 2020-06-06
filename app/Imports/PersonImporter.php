@@ -48,7 +48,8 @@ class PersonImporter implements ToModel, WithHeadingRow
                 'description' => "Help bring justice to $person->full_name by signing this petition",
                 'link' => $petition,
                 'outcome' => null,
-                'image_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
                 'status' => 1,
                 'type_id' => PetitionLinkTypes::FOR_VICTIMS,
             ]);
