@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Person;
+use App\Models\Statics\PetitionLinkTypes;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -48,7 +49,8 @@ class PersonImporter implements ToModel, WithHeadingRow
                 'link' => $petition,
                 'outcome' => null,
                 'image_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
-                'status' => 1
+                'status' => 1,
+                'type_id' => PetitionLinkTypes::FOR_VICTIMS,
             ]);
         }
 
