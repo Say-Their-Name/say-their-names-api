@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class PeopleTest extends TestCase
@@ -205,20 +206,24 @@ class PeopleTest extends TestCase
     }
 
     /**
-     * @param \Illuminate\Testing\TestResponse $response
+     * @param TestResponse $response
      */
-    private function validatePersonJSONStructure(\Illuminate\Testing\TestResponse $response): void
+    private function validatePersonJSONStructure(TestResponse $response): void
     {
         $response->assertJsonStructure(
             [
                 'data' => [
                     'id',
                     'full_name',
+                    'identifier',
+                    'date_of_birth',
                     'date_of_incident',
                     'number_of_children',
                     'age',
                     'city',
                     'country',
+                    'their_story',
+                    'outcome',
                     'context',
                     'images',
                     'donation_links',
@@ -231,9 +236,9 @@ class PeopleTest extends TestCase
     }
 
     /**
-     * @param \Illuminate\Testing\TestResponse $response
+     * @param TestResponse $response
      */
-    private function validatePeopleFoundJSONStructure(\Illuminate\Testing\TestResponse $response): void
+    private function validatePeopleFoundJSONStructure(TestResponse $response): void
     {
         $response->assertJsonStructure(
             [
@@ -241,11 +246,14 @@ class PeopleTest extends TestCase
                     [
                         'id',
                         'full_name',
+                        'date_of_birth',
                         'date_of_incident',
                         'number_of_children',
                         'age',
                         'city',
                         'country',
+                        'their_story',
+                        'outcome',
                         'context',
                         'images'
                     ]
@@ -270,9 +278,9 @@ class PeopleTest extends TestCase
     }
 
     /**
-     * @param \Illuminate\Testing\TestResponse $response
+     * @param TestResponse $response
      */
-    private function validatePeopleNotFoundJSONStructure(\Illuminate\Testing\TestResponse $response): void
+    private function validatePeopleNotFoundJSONStructure(TestResponse $response): void
     {
         $response->assertJsonStructure(
             [
