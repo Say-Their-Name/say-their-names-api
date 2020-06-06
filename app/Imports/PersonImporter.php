@@ -37,6 +37,18 @@ class PersonImporter implements ToModel, WithHeadingRow
                 'status' => 1,
             ]);
         }
+
+        foreach (explode(',', $row['petition_links']) as $petition) {
+            $person->petitionLinks()->create([
+                'title' => "Petition For $person->full_name",
+                'description' => "Help bring justice to $person->full_name by signing this petition",
+                'link' => $petition,
+                'outcome' => null,
+                'image_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'status' => 1
+            ]);
+        }
+
         return $person;
     }
 }

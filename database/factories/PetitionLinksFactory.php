@@ -11,7 +11,7 @@ $factory->define(PetitionLinks::class, function (Faker $faker) {
         'description' => $faker->paragraph,
         'link' => $faker->url,
         'outcome' => $faker->paragraph,
-        'image_url' => $faker->imageUrl(),
+        'image_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
         'status' => 1
     ];
 });
