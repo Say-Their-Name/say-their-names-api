@@ -7,23 +7,36 @@ on:
     branches: [ master ]
 
 jobs:
-  laravel-tests:
+  tests:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-      - uses: overtrue/phplint@master
-      - name: Copy ENV Laravel Configuration for CI
-        run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
-      - name: Install Composer Dependencies (PHP vendors)
-        run: composer install
-      - name: Generate encryption key
-        run: php artisan key:generate
-      - name: Generate a JWT secret
-        run: php artisan jwt:secret
-      - name: Create DB and schemas
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          coverage: none
+
+      - name: Install Composer dependencies
         run: |
-          touch database/database.sqlite
-          php artisan migrate:fresh --seed
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+          composer install --prefer-dist --no-interaction --no-suggest
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Compile assets
+        run: npm run production
+
       - name: Execute tests
-        run: php artisan test
+        run: vendor/bin/phpunit --verbose
 
