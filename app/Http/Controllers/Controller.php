@@ -21,7 +21,7 @@ class Controller extends BaseController
  * description="Find our more here: [https://github.com/Say-Their-Name/api](https://github.com/Say-Their-Name/api)"
  * )
  */
-/** 
+/**
 * @OA\Tag(
 *     name="people",
 *     description="Find People",

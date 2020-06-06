@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Models\Filters\Traits;
 
 use App\Models\Person;
@@ -13,5 +12,4 @@ trait FilterableByPerson
             $q->where(Person::SLUG, $name);
         })->get();
     }
-
 }

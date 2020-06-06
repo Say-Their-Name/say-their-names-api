@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Utils;
-
 
 use Illuminate\Support\Str;
 
 class TypeUtils
 {
-
     public static function getTypeId($name, $types)
     {
         $key = Str::ucfirst(Str::lower($name));

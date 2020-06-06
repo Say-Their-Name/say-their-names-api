@@ -3,7 +3,6 @@
 namespace App\Models\Filters;
 
 use App\Models\Filters\Traits\FilterableByPerson;
-use App\Models\Person;
 use App\Models\Statics\DonationLinkTypes;
 use EloquentFilter\ModelFilter;
 
