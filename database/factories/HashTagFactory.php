@@ -2,13 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\SocialMedia;
+use App\Models\HashTag;
 use Faker\Generator as Faker;
 
-$factory->define(SocialMedia::class, function (Faker $faker) {
+$factory->define(HashTag::class, function (Faker $faker) {
     return [
-        'title' => '#' . $faker->word(),
-        'type' => 'hashtag',
+        'tag' => '#placeholder',
         'link' => $faker->url,
         'status' => 1
     ];

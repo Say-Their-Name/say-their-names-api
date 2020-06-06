@@ -229,7 +229,7 @@ class PeopleTest extends TestCase
                     'donation_links',
                     'petition_links',
                     'media_links',
-                    'social_media'
+                    'hash_tags'
                 ]
             ]
         );

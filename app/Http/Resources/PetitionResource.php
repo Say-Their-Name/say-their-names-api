@@ -18,7 +18,7 @@ class PetitionResource extends JsonResource
             'banner_img_url' => $this->banner_img_url,
             'person' => new PersonResource($this->whenLoaded('person')),
             'type' => new PetitionLinkTypesResource($this->whenLoaded('type')),
-            'social_media' => SocialMediaResource::collection($this->whenLoaded('socialMedia')),
+            'hash_tags' => HashTagResource::collection($this->whenLoaded('hashTags')),
         ];
     }
 }

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\Models\Traits\HasBookmarks;
 use App\Models\Traits\HasDonations;
+use App\Models\Traits\HasHashTags;
 use App\Models\Traits\HasMedia;
 use App\Models\Traits\HasPetitions;
-use App\Models\Traits\HasSocialMedia;
 use App\Models\Traits\Unguarded;
 use EloquentFilter\Filterable;
 use Spatie\Searchable\Searchable;
@@ -20,7 +20,7 @@ class Person extends BaseModel implements Searchable
     use HasPetitions;
     use HasDonations;
     use HasMedia;
-    use HasSocialMedia;
+    use HasHashTags;
     use HasBookmarks;
     use Filterable;
     use HasSlug;
@@ -44,7 +44,7 @@ class Person extends BaseModel implements Searchable
             'petitionLinks',
             'mediaLinks',
             'images',
-            'socialMedia',
+            'hashTags',
         ]);
     }
 

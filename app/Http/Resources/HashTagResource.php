@@ -4,13 +4,12 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SocialMediaResource extends JsonResource
+class HashTagResource extends JsonResource
 {
     public function toArray($request)
     {
         return [
-            'title' => $this->title,
-            'type' => $this->type,
+            'tag' => $this->tag,
             'link' => $this->link,
         ];
     }

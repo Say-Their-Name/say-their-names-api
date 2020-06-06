@@ -10,7 +10,7 @@ class GetSinglePetitionController extends Controller
 {
     public function __invoke($petition)
     {
-        return new PetitionResource(PetitionLinks::with(['person'])
+        return new PetitionResource(PetitionLinks::with(['person', 'hashTags'])
             ->findOrFail($petition));
     }
 }
