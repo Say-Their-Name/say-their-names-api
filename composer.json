@@ -14,6 +14,7 @@
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "hootlex/laravel-moderation": "^1.1",
+        "lanin/laravel-api-debugger": "^3.5",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "maatwebsite/excel": "^3.1",
