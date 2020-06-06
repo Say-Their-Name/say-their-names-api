@@ -39,6 +39,9 @@ class PersonImporter implements ToModel, WithHeadingRow
         }
 
         foreach (explode(',', $row['petition_links']) as $petition) {
+            if ($petition == '') {
+                continue;
+            }
             $person->petitionLinks()->create([
                 'title' => "Petition For $person->full_name",
                 'description' => "Help bring justice to $person->full_name by signing this petition",

@@ -3,10 +3,8 @@
 use App\Imports\PersonImporter;
 use App\Models\DonationLinks;
 use App\Models\Person;
-use App\Models\PetitionLinks;
 use App\Models\SocialMedia;
 use App\Models\Statics\DonationLinkTypes;
-use App\Models\Statics\PetitionLinkTypes;
 use Illuminate\Database\Seeder;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -21,7 +19,7 @@ class PeopleTableSeeder extends Seeder
                 'person_id' => $person->id,
                 'type_id' => DonationLinkTypes::VICTIMS
             ]);
-            factory(SocialMedia::class)->create([
+            factory(SocialMedia::class, rand(1, 5))->create([
                 'person_id' => $person->id,
             ]);
         }
