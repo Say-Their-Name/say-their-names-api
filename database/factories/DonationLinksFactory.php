@@ -11,7 +11,8 @@ $factory->define(DonationLinks::class, function (Faker $faker) {
         'description' => $faker->paragraph,
         'link' => $faker->url,
         'outcome' => $faker->paragraph,
-        'image_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+        'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+        'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
         'status' => 1,
     ];
 });
