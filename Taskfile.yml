@@ -56,6 +56,12 @@ tasks:
     cmds:
       - docker-compose logs -f
 
+  migrate:
+    desc: Reset the database and run the seed
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} php artisan migrate && redis-cli flushall"
+
   dbreset:
     desc: Reset the database and run the seed
     deps: [start]
@@ -67,6 +73,12 @@ tasks:
     deps: [start]
     cmds:
       - "{{.PREFIX}} bash"
+
+  generate-swagger:
+    desc: Generate OpenAPI (Swagger) spec YAML
+    deps: [start]
+    cmds:
+      - "{{.PREFIX}} sh -c 'cd public/swagger ; php -q doc.php > swagger.yaml'"
 
   phpcs:
     desc: Run PHP Code Sniffer

@@ -25,6 +25,11 @@ class Person extends BaseModel implements Searchable
     use Filterable;
     use HasSlug;
 
+    public $casts = [
+        'number_of_children' => 'int',
+        'age' => 'int',
+    ];
+
     const SLUG = 'identifier';
 
     public function getSearchResult(): SearchResult
