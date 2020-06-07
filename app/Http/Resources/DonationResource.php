@@ -10,6 +10,7 @@ class DonationResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'identifier' => $this->identifier,
             'title' => $this->title,
             'description' => $this->description,
             'outcome' => $this->outcome,

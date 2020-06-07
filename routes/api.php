@@ -18,11 +18,11 @@ Route::middleware('api')->group(function () {
 
     Route::get('donation-types', ListDonationTypesController::class);
     Route::get('donations', ListDonationsController::class);
-    Route::get('donations/{donation}', GetSingleDonationController::class);
+    Route::get('donations/{slug}', GetSingleDonationController::class);
 
     Route::get('petition-types', ListPetitionTypesController::class);
     Route::get('petitions', ListPetitionsController::class);
-    Route::get('petitions/{petition}', GetSinglePetitionController::class);
+    Route::get('petitions/{slug}', GetSinglePetitionController::class);
 
     Route::post('join/newsletter', JoinMailingListController::class);
     Route::get('search', SearchController::class);
