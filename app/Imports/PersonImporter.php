@@ -113,7 +113,7 @@ class PersonImporter implements ToModel, WithHeadingRow
         foreach (explode(',', $row) as $hashtag) {
             $person->hashTags()->create([
                 'tag' => $hashtag,
-                'link' => 'https://twitter.com/search?q=%23' . $hashtag,
+                'link' => 'https://twitter.com/search?q=' . urlencode($hashtag),
                 'status' => 1
             ]);
         }
