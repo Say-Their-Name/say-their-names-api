@@ -18,8 +18,6 @@ jobs:
         run: composer install
       - name: Generate encryption key
         run: php artisan key:generate
-      - name: Generate a JWT secret
-        run: php artisan jwt:secret
       - name: Create DB and schemas
         run: |
           touch database/database.sqlite
