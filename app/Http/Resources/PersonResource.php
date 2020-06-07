@@ -12,7 +12,6 @@ class PersonResource extends JsonResource
             'id' => $this->id,
             'full_name' => $this->full_name,
             'identifier' => $this->identifier,
-            'date_of_birth' => $request->header('x-dates-epoch') ? strtotime($this->date_of_birth) : $this->date_of_birth,
             'date_of_incident' => $request->header('x-dates-epoch') ? strtotime($this->date_of_incident) : $this->date_of_incident,
             'number_of_children' => $this->number_of_children,
             'age' => $this->age,

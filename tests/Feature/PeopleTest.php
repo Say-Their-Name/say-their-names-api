@@ -216,7 +216,6 @@ class PeopleTest extends TestCase
                     'id',
                     'full_name',
                     'identifier',
-                    'date_of_birth',
                     'date_of_incident',
                     'number_of_children',
                     'age',
@@ -246,7 +245,6 @@ class PeopleTest extends TestCase
                     [
                         'id',
                         'full_name',
-                        'date_of_birth',
                         'date_of_incident',
                         'number_of_children',
                         'age',

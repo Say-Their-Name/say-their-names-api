@@ -10,7 +10,6 @@ $factory->define(Person::class, function (Faker $faker) {
     $date = $faker->dateTimeThisCentury(now()->subYears(7));
     return [
         'full_name' => $faker->firstName . ' ' . $faker->lastName,
-        'date_of_birth' => $date,
         'date_of_incident' => $faker->dateTimeThisDecade(),
         'number_of_children' => $faker->numberBetween(1, 10),
         'age' => Carbon::parse($date)->age,
