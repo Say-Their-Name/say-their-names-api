@@ -19,12 +19,11 @@ class PetitionsTest extends TestCase
     {
         $this->seed();
 
-        $petition_id = 1;
-        $response = $this->get('/api/petitions/' . $petition_id . '');
+        $response = $this->get('/api/petitions/petition-for-tony-mcdade');
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['id' => $petition_id]);
+        $response->assertJsonFragment(['identifier' => 'petition-for-tony-mcdade']);
 
         $this->validatePetitionJSONStructure($response);
     }

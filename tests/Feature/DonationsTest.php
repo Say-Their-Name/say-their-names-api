@@ -13,12 +13,12 @@ class DonationsTest extends TestCase
     public function testGetSingleDonation()
     {
         $this->seed();
-        $donation_id = 2;
-        $response = $this->get('/api/donations/' . $donation_id . '');
+
+        $response = $this->get('/api/donations/black-lives-matter-fund');
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['id' => $donation_id]);
+        $response->assertJsonFragment(['identifier' => 'black-lives-matter-fund']);
 
         $this->validateDonationJSONStructure($response);
     }
@@ -110,6 +110,7 @@ class DonationsTest extends TestCase
             [
                 'data' => [
                     'id',
+                    'identifier',
                     'title',
                     'description',
                     'link',
