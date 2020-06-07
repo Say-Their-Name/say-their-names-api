@@ -15,8 +15,8 @@ class DonationLinkImporter implements ToModel, WithHeadingRow
             'description' => $row['description'],
             'link' => $row['link'],
             'outcome' => null,
-            'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
-            'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+            'banner_img_url' => $row['image'],
+            'outcome_img_url' => $row['outcome_image'],
             'status' => 1,
         ]);
     }
