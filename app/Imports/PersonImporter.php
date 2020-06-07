@@ -91,7 +91,7 @@ class PersonImporter implements ToModel, WithHeadingRow
             }
             $donationCreated = $person->donationLinks()->create([
                 'title' => "Donate to $person->full_name",
-                'description' => "Donate $person->full_name by signing this petition",
+                'description' => "Donate $person->full_name by donating here",
                 'link' => $donation,
                 'outcome' => null,
                 'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
