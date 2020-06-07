@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Person;
+use App\Models\Statics\DonationLinkTypes;
 use App\Models\Statics\PetitionLinkTypes;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -39,11 +40,19 @@ class PersonImporter implements ToModel, WithHeadingRow
             ]);
         }
 
+        foreach (explode(',', $row['hashtags']) as $hashtag) {
+            $person->hashTags()->create([
+                'tag' => $hashtag,
+                'link' => "https://twitter.com/search?q=%23$person->full_name",
+                'status' => 1
+            ]);
+        }
+
         foreach (explode(',', $row['petition_links']) as $petition) {
             if ($petition == '') {
                 continue;
             }
-            $person->petitionLinks()->create([
+            $petitionCreated = $person->petitionLinks()->create([
                 'title' => "Petition For $person->full_name",
                 'description' => "Help bring justice to $person->full_name by signing this petition",
                 'link' => $petition,
@@ -52,6 +61,34 @@ class PersonImporter implements ToModel, WithHeadingRow
                 'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
                 'status' => 1,
                 'type_id' => PetitionLinkTypes::FOR_VICTIMS,
+            ]);
+
+            $petitionCreated->hashtags()->create([
+                'tag' => '#petitionfor' . str_replace(' ', '', $person->full_name),
+                'link' => 'https://twitter.com/search?q=%23petitionfor' . str_replace(' ', '', $person->full_name),
+                'status' => 1
+            ]);
+        }
+
+        foreach (explode(',', $row['donation_links']) as $donation) {
+            if ($donation == '') {
+                continue;
+            }
+            $donationCreated = $person->donationLinks()->create([
+                'title' => "Donate to $person->full_name",
+                'description' => "Donate $person->full_name by signing this petition",
+                'link' => $donation,
+                'outcome' => null,
+                'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'status' => 1,
+                'type_id' => DonationLinkTypes::VICTIMS,
+            ]);
+
+            $donationCreated->hashtags()->create([
+                'tag' => '#donateto' . str_replace(' ', '', $person->full_name),
+                'link' => 'https://twitter.com/search?q=%23donateto' . str_replace(' ', '', $person->full_name),
+                'status' => 1
             ]);
         }
 
