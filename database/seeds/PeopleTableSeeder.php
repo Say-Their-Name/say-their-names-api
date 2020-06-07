@@ -1,11 +1,6 @@
 <?php
 
 use App\Imports\PersonImporter;
-use App\Models\DonationLinks;
-use App\Models\HashTag;
-use App\Models\Person;
-use App\Models\PetitionLinks;
-use App\Models\Statics\DonationLinkTypes;
 use Illuminate\Database\Seeder;
 use Maatwebsite\Excel\Facades\Excel;
 

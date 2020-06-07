@@ -12,6 +12,17 @@ class PersonImporter implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
+        $person = $this->createPerson($row);
+        $this->createImages($person, $row['images']);
+        $this->createNews($person, $row['news_links']);
+        $this->createPetitions($person, $row['petition_links']);
+        $this->createDonations($person, $row['donation_links']);
+        $this->createHashTags($person, $row['hashtags']);
+        return $person;
+    }
+
+    public function createPerson(array $row)
+    {
         $person = new Person([
             'full_name' => $row['name'],
             'date_of_incident' => $row['date_of_incident'],
@@ -23,32 +34,33 @@ class PersonImporter implements ToModel, WithHeadingRow
             'context' => $row['context'],
             'status' => 1,
         ]);
-
         $person->save();
+        return $person;
+    }
 
-        foreach (explode(',', $row['images']) as $image) {
+    public function createImages(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $image) {
             $person->images()->create([
                 'image_url' => $image,
                 'status' => 1,
             ]);
         }
+    }
 
-        foreach (explode(',', $row['news_links']) as $image) {
+    public function createNews(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $image) {
             $person->mediaLinks()->create([
                 'url' => $image,
                 'status' => 1,
             ]);
         }
+    }
 
-        foreach (explode(',', $row['hashtags']) as $hashtag) {
-            $person->hashTags()->create([
-                'tag' => $hashtag,
-                'link' => 'https://twitter.com/search?q=%23' . $hashtag,
-                'status' => 1
-            ]);
-        }
-
-        foreach (explode(',', $row['petition_links']) as $petition) {
+    public function createPetitions(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $petition) {
             if ($petition == '') {
                 continue;
             }
@@ -69,8 +81,11 @@ class PersonImporter implements ToModel, WithHeadingRow
                 'status' => 1
             ]);
         }
+    }
 
-        foreach (explode(',', $row['donation_links']) as $donation) {
+    public function createDonations(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $donation) {
             if ($donation == '') {
                 continue;
             }
@@ -91,7 +106,16 @@ class PersonImporter implements ToModel, WithHeadingRow
                 'status' => 1
             ]);
         }
+    }
 
-        return $person;
+    public function createHashTags(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $hashtag) {
+            $person->hashTags()->create([
+                'tag' => $hashtag,
+                'link' => 'https://twitter.com/search?q=%23' . $hashtag,
+                'status' => 1
+            ]);
+        }
     }
 }
