@@ -9,7 +9,7 @@ class UsersTableSeeder extends Seeder
     {
         factory(User::class)->create([
             'name' => 'Test User',
-            'email' => 'test-user@test.com',
+            'email' => 'email@email.com',
         ]);
     }
 }

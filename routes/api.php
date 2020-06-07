@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Authentication\LoginController;
 use App\Http\Controllers\API\Donations\GetSingleDonationController;
 use App\Http\Controllers\API\Donations\ListDonationsController;
 use App\Http\Controllers\API\Donations\ListDonationTypesController;
@@ -13,6 +14,8 @@ use App\Http\Controllers\API\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('api')->group(function () {
+    Route::post('login', LoginController::class);
+
     Route::get('people', ListPeopleController::class);
     Route::get('people/{slug}', GetSinglePersonController::class);
 

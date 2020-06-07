@@ -7,13 +7,14 @@ use App\Models\Traits\Unguarded;
 use App\Notifications\ForgotPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable
 {
     use Notifiable;
     use Unguarded;
     use HasBookmarks;
+    use HasApiTokens;
 
     protected $hidden = [
         'password', 'remember_token',
@@ -22,19 +23,4 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ForgotPassword($token));
-    }
-
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 }

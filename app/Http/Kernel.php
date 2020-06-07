@@ -25,6 +25,7 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 class Kernel extends HttpKernel
 {
@@ -55,6 +56,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            EnsureFrontendRequestsAreStateful::class,
             'throttle:60,1',
             SubstituteBindings::class,
             ConvertRequestToJson::class,
