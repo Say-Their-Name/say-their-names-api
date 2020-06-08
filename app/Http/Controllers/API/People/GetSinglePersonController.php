@@ -10,9 +10,9 @@ class GetSinglePersonController extends Controller
 {
     /**
      * @OA\Get(
-     *    path="/api/people/{id}",
+     *    path="/api/people/{firstname-lastname}",
      *    tags={"people"},
-     *    summary="Search People by id",
+     *    summary="Search People by identifier",
      *    operationId="getUserByID",
      *    @OA\Parameter(
      *         name="id",
