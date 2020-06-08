@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RegisterRequest extends FormRequest
 {
@@ -25,6 +26,9 @@ class RegisterRequest extends FormRequest
                 'min:6',
                 'confirmed',
             ],
+            'device_name' => [
+                'required',
+            ]
         ];
     }
 }
