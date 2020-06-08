@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Models\Objects;
-
 
 use Spatie\DataTransferObject\DataTransferObject;
 

@@ -4,7 +4,6 @@ namespace App;
 
 use App\Models\Traits\HasBookmarks;
 use App\Models\Traits\Unguarded;
-use App\Notifications\ForgotPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;

@@ -27,13 +27,13 @@ class Person extends BaseModel implements Searchable
     use Filterable;
     use HasSlug;
 
+    const SLUG = 'identifier';
+
     public $casts = [
         'number_of_children' => 'int',
         'age' => 'int',
         'sharable_links' => SharableLinksCast::class,
     ];
-
-    const SLUG = 'identifier';
 
     public function getSearchResult(): SearchResult
     {

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API\Authentication;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Http\Resources\User\UserResource;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;

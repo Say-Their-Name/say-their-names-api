@@ -95,7 +95,6 @@ class ListPeopleController extends Controller
      */
     public function __invoke(Request $request)
     {
-
         return PersonResource::collection(Person::filter($request->all())
             ->with('images')
             ->orderBy('date_of_incident', 'DESC')
