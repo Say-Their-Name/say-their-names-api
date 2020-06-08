@@ -17,6 +17,7 @@ class PetitionResource extends JsonResource
             'link' => $this->link,
             'outcome_img_url' => $this->outcome_img_url,
             'banner_img_url' => $this->banner_img_url,
+            'sharable_links' => $this->sharable_links,
             'person' => new PersonResource($this->whenLoaded('person')),
             'type' => new PetitionLinkTypesResource($this->whenLoaded('type')),
             'hash_tags' => HashTagResource::collection($this->whenLoaded('hashTags')),

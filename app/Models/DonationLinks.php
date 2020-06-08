@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Casts\SharableLinksCast;
+use App\Models\Objects\SharableLinks;
 use App\Models\Traits\BelongsToPerson;
 use App\Models\Traits\HasDonationType;
 use App\Models\Traits\HasHashTags;
@@ -21,6 +23,10 @@ class DonationLinks extends BaseModel implements Searchable
 
     const SLUG = 'identifier';
 
+    protected $casts = [
+        'sharable_links' => SharableLinksCast::class,
+    ];
+
     public function getSearchResult(): SearchResult
     {
         return new SearchResult($this, $this->id);
@@ -31,5 +37,18 @@ class DonationLinks extends BaseModel implements Searchable
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo(self::SLUG);
+    }
+
+    protected static function booted()
+    {
+        static::saving(function ($model) {
+            $base = "https://www.saythiernames.io/donations/$model->identifier";
+            $model->sharable_links = new SharableLinks([
+                'base' => $base,
+                'facebook' => "https://www.facebook.com/sharer/sharer.php?u=$base",
+                'twitter' => "https://twitter.com/home?status=$base",
+                'whatsapp' => "https://wa.me/?text=$base"
+            ]);
+        });
     }
 }

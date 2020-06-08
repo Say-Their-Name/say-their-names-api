@@ -20,6 +20,7 @@ class CreatePeopleTable extends Migration
             $table->text('biography')->nullable();
             $table->text('context')->nullable();
             $table->text('outcome')->nullable();
+            $table->json('sharable_links')->nullable();
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();

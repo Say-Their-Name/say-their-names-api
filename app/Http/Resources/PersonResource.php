@@ -21,6 +21,7 @@ class PersonResource extends JsonResource
             'outcome' => $this->outcome,
             'context' => $this->context,
             'images' => $this->images,
+            'sharable_links' => $this->sharable_links,
             'donation_links' => DonationResource::collection($this->whenLoaded('donationLinks')),
             'petition_links' => PetitionResource::collection($this->whenLoaded('petitionLinks')),
             'media_links' => MediaLinksResource::collection($this->whenLoaded('mediaLinks')),

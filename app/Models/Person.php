@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Casts\SharableLinksCast;
+use App\Models\Objects\SharableLinks;
 use App\Models\Traits\HasBookmarks;
 use App\Models\Traits\HasDonations;
 use App\Models\Traits\HasHashTags;
@@ -28,6 +30,7 @@ class Person extends BaseModel implements Searchable
     public $casts = [
         'number_of_children' => 'int',
         'age' => 'int',
+        'sharable_links' => SharableLinksCast::class,
     ];
 
     const SLUG = 'identifier';
@@ -58,5 +61,18 @@ class Person extends BaseModel implements Searchable
         return SlugOptions::create()
             ->generateSlugsFrom('full_name')
             ->saveSlugsTo(self::SLUG);
+    }
+
+    protected static function booted()
+    {
+        static::saving(function ($model) {
+            $base = "https://www.saythiernames.io/people/$model->identifier";
+            $model->sharable_links = new SharableLinks([
+                'base' => $base,
+                'facebook' => "https://www.facebook.com/sharer/sharer.php?u=$base",
+                'twitter' => "https://twitter.com/home?status=$base",
+                'whatsapp' => "https://wa.me/?text=$base"
+            ]);
+        });
     }
 }
