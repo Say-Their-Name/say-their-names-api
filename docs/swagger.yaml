@@ -1,0 +1,63 @@
+openapi: 3.0.0
+info:
+  title: 'Say Their Name API'
+  description: 'Find our more here: [https://github.com/Say-Their-Name/api](https://github.com/Say-Their-Name/api)'
+  version: '1.0'
+paths:
+  '/api/people/{id}':
+    get:
+      tags:
+        - people
+      summary: 'Search People by id'
+      operationId: getUserByID
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  id: { type: integer }
+                  full_name: { type: string }
+                  identifier: { type: string }
+                  date_of_incident: { type: date }
+                  number_of_children: { type: integer }
+                  age: { type: integer }
+                  city: { type: string }
+                  country: { type: string }
+                  context: { type: string }
+                  images: { type: array, items: { properties: { id: { type: integer }, person_id: { type: integer }, image_url: { type: string } }, type: object } }
+                  donation_links: { type: array, items: { properties: { id: { type: integer }, identifier: { type: string }, title: { type: string }, description: { type: string }, outcome: { type: string }, link: { type: string }, outcome_img_url: { type: string }, banner_img_url: { type: string } }, type: object } }
+                  petition_links: { type: array, items: { properties: { id: { type: integer }, identifier: { type: string }, title: { type: string }, description: { type: string }, outcome: { type: string }, link: { type: string }, outcome_img_url: { type: string }, banner_img_url: { type: string } }, type: object } }
+                  media_links: { type: array, items: { properties: { url: { type: string } }, type: object } }
+                type: object
+  /api/people:
+    get:
+      tags:
+        - people
+      summary: 'Returns paginated list of People'
+      description: 'Returns paginated list of People'
+      operationId: getPeople
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  links: { properties: { first: { type: string }, last: { type: string }, prev: { type: string }, next: { type: string } }, type: object }
+                  meta: { properties: { current_page: { type: integer }, from: { type: integer }, last_page: { type: integer }, path: { type: string }, per_page: { type: integer }, to: { type: integer }, total: { type: integer } }, type: object }
+                  data: { type: array, items: { properties: { id: { type: integer }, full_name: { type: string }, identifier: { type: string }, date_of_incident: { type: date }, number_of_children: { type: integer }, age: { type: integer }, city: { type: string }, country: { type: string }, context: { type: string }, images: { type: array, items: { properties: { id: { type: integer }, person_id: { type: integer }, image_url: { type: string } }, type: object } }, donation_links: { type: array, items: { properties: { id: { type: integer }, identifier: { type: string }, title: { type: string }, description: { type: string }, outcome: { type: string }, link: { type: string }, outcome_img_url: { type: string }, banner_img_url: { type: string } }, type: object } }, petition_links: { type: array, items: { properties: { id: { type: integer }, identifier: { type: string }, title: { type: string }, description: { type: string }, outcome: { type: string }, link: { type: string }, outcome_img_url: { type: string }, banner_img_url: { type: string } }, type: object } }, media_links: { type: array, items: { properties: { url: { type: string } }, type: object } } }, type: object } }
+                type: object
+tags:
+  -
+    name: people
+    description: 'Find People'
