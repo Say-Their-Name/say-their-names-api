@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -14,11 +13,11 @@ class PeopleTest extends TestCase
     public function testGetSinglePerson()
     {
         $this->seed();
-        $person = factory(Person::class)->create();
-        $response = $this->get('/api/people/' . $person->identifier . '');
+        $person = 'george-floyd';
+        $response = $this->get('/api/people/' . $person);
 
         $response->assertSuccessful();
-        $response->assertJsonFragment(['full_name' => $person->full_name]);
+        $response->assertJsonFragment(['identifier' => $person]);
 
         $this->validatePersonJSONStructure($response);
     }

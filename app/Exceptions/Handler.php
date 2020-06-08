@@ -30,7 +30,7 @@ class Handler extends ExceptionHandler
         ) {
             return response()->json([
                 'errors' => [
-                    'message' => '404 Not Found',
+                    'message' => 'Not Found',
                 ],
             ], 404);
         }
