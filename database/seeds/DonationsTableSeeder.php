@@ -13,16 +13,18 @@ class DonationsTableSeeder extends Seeder
         $airtableDonations = AirtableFacade::table('donations')->all();
 
         foreach ($airtableDonations as $donation) {
-            DonationLink::create([
-                'title' => $donation['fields']['TITLE'],
-                'description' => isset($donation['fields']['DESCRIPTION']) ? $donation['fields']['DESCRIPTION'] : StaticText::CONTRIBUTION_TEXT,
-                'link' => $donation['fields']['LINK'],
-                'outcome' => isset($donation['fields']['OUTCOME']) ? $donation['fields']['OUTCOME'] : StaticText::CONTRIBUTION_TEXT,
-                'banner_img_url' => $donation['fields']['IMAGE'],
-                'outcome_img_url' => $donation['fields']['OUTCOME IMAGE'],
-                'type_id' => DonationLinkTypes::MOVEMENT,
-                'status' => 1,
-            ]);
+            DonationLink::updateOrCreate(
+                ['title' => $donation['fields']['TITLE'] ],
+                [
+                    'description' => isset($donation['fields']['DESCRIPTION']) ? $donation['fields']['DESCRIPTION'] : StaticText::CONTRIBUTION_TEXT,
+                    'link' => $donation['fields']['LINK'],
+                    'outcome' => isset($donation['fields']['OUTCOME']) ? $donation['fields']['OUTCOME'] : StaticText::CONTRIBUTION_TEXT,
+                    'banner_img_url' => $donation['fields']['IMAGE'],
+                    'outcome_img_url' => $donation['fields']['OUTCOME IMAGE'],
+                    'type_id' => DonationLinkTypes::MOVEMENT,
+                    'status' => 1,
+                ]
+            );
         }
     }
 }
