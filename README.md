@@ -12,6 +12,8 @@ Welcome to the Say Their Names project. Our aim is to build an open-source platf
 
 That being said, this codebase isn't your typical open source project because it's not a library or package with a limited scope—it's our entire product.
 
+This specific repository is a Laravel API that will be used to return the data to the IOS, Android and Web teams.
+
 **Live API can be found here:**  
 
 [https://saytheirnames.dev](https://saytheirnames.dev)
@@ -61,7 +63,7 @@ Login using the user/password from the .env.example (should be `stn`/`stn`)
 
 
 ---
-[Other (not recommended) ways to setup are available here](docs/install_alternatives.md)
+[Other ways to setup are available here](docs/install_alternatives.md)
 
 ## Endpoints Available
 
@@ -114,5 +116,3 @@ http://localhost:8000/api/petitions?type=victims
 Filter by Person
 http://localhost:8000/api/petitions?name=george-floyd
 ```
-
-## Developer tooling
