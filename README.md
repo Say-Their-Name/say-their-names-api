@@ -1,6 +1,10 @@
+![Banner](https://say-their-names.fra1.cdn.digitaloceanspaces.com/assets/cover.png)
+
 ![CI](https://github.com/Say-Their-Name/say-their-names-api/workflows/CI/badge.svg)
 
-# Say Their Names ✊🏿
+<p align="center">
+  <h1>Say Their Names ✊🏿</h1>
+</p>
 
 ## Overview
 
@@ -9,110 +13,13 @@ Welcome to the Say Their Names project. Our aim is to build an open-source platf
 ## Contributing
 
 **We heartily welcome any and all contributions that match our engineering standards!**
-
 That being said, this codebase isn't your typical open source project because it's not a library or package with a limited scope—it's our entire product.
 
-This specific repository is a Laravel API that will be used to return the data to the IOS, Android and Web teams.
+<p align="center">
+<h3>Wan't to Contribute? Check out our other repositories</h3>
+<a href="https://github.com/Say-Their-Name/say-their-names-api">API</a>
+<a href="https://github.com/Say-Their-Name/say-their-names-ios">IOS</a>
+<a href="https://github.com/Say-Their-Name/say-their-names-android">Android</a>
+<a href="https://github.com/Say-Their-Name/say-their-names-web">Web</a>
+</p>
 
-**Live API can be found here:**  
-
-[https://saytheirnames.dev](https://saytheirnames.dev)
-
-## Get the code
-```
-git clone https://github.com/Say-Their-Name/api.git
-cd api
-```
-
-## Setup with Docker
-This is the recommended setup,as it prevents many PHP or dependency issues 
-(compatibility, missing PHP extension...).
-
-### Requirements
-* [Docker](https://docs.docker.com/get-docker/)  
-* [Docker Compose](https://docs.docker.com/compose/install/)  
-* [Taskfile](https://taskfile.dev/#/installation) *(optional,but much recommended)*
-
-### Initial setup,with Taskfile *(recommended)*
-```
-git clone https://github.com/Say-Their-Name/api.git
-cd api
-
-# Build the development Docker image
-task build
-
-# Start the stack
-task
-
-# Install vendor dependencies
-task vendor
-
-# Prepare the database
-task dbreset
-
-# Run shell in the running container
-task sh
-
-## from shell you can run composer, artisan, etc
-```
-Go to http://localhost:8000
-
-### Adminer (Web UI for MySQL DB)  
-It's accessible at http://localhost:48080  
-Login using the user/password from the .env.example (should be `stn`/`stn`)  
-
-
----
-[Other ways to setup are available here](docs/install_alternatives.md)
-
-## Endpoints Available
-
-```
-GET People
-List all
-http://localhost:8000/api/people
-
-Get Single
-http://localhost:8000/api/people/{firstname-lastname}
-
-Filter by name
-http://localhost:8000/api/people?name=george-floyd
-
-Filter by country
-http://localhost:8000/api/people?country=united-states
-
-Filter by city
-http://localhost:8000/api/people?city=minnesota
-
-GET Donations
-List Types
-http://localhost:8000/api/donation-types
-
-List all
-http://localhost:8000/api/donations
-
-Get Single
-http://localhost:8000/api/donations/{slug}
-
-Filter by Type
-http://localhost:8000/api/donations?type=victims
-
-Filter by Victim
-http://localhost:8000/api/donations?name=george-floyd
-
-GET Petitions
-List Types
-http://localhost:8000/api/petition-types
-
-List All
-http://localhost:8000/api/petitions
-
-Get Single
-http://localhost:8000/api/petitions/{slug}
-
-Filter by Type
-http://localhost:8000/api/petitions?type=victims
-
-Filter by Person
-http://localhost:8000/api/petitions?name=george-floyd
-```
