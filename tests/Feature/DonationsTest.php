@@ -17,7 +17,7 @@ class DonationsTest extends TestCase
     {
         $donation  = factory(DonationLink::class)->create();
 
-        $response = $this->get("/api/donations/$donation->identifier");
+        $response = $this->get("/api/donations/{$donation->identifier}");
 
         $response->assertSuccessful();
 
@@ -52,7 +52,7 @@ class DonationsTest extends TestCase
     public function testGetAllDonationsFilteredByType()
     {
         factory(DonationLink::class, 3)->create([
-            'type_id' => DonationLinkTypes::VICTIMS
+            'type_id' => DonationLinkTypes::VICTIMS,
         ]);
 
         $type = 'Victims';
@@ -71,7 +71,7 @@ class DonationsTest extends TestCase
         $person = factory(Person::class)->create();
 
         factory(DonationLink::class)->create([
-            'person_id' => $person
+            'person_id' => $person,
         ]);
 
         $response = $this->get('/api/donations/?name=' . $person->identifier . '');
@@ -109,7 +109,7 @@ class DonationsTest extends TestCase
     {
         $response = $this->get('/api/donations/908902432');
 
-        $response->assertJsonFragment(['message' => "Not Found"]);
+        $response->assertJsonFragment(['message' => 'Not Found']);
     }
 
     /**
@@ -125,8 +125,8 @@ class DonationsTest extends TestCase
                     'title',
                     'description',
                     'link',
-                    'person'
-                ]
+                    'person',
+                ],
             ]
         );
     }
@@ -149,14 +149,14 @@ class DonationsTest extends TestCase
                         'banner_img_url',
                         'sharable_links',
                         'person',
-                    ]
+                    ],
 
                 ],
                 'links' => [
                     'first',
                     'last',
                     'prev',
-                    'next'
+                    'next',
                 ],
                 'meta' => [
                     'current_page',
@@ -165,8 +165,8 @@ class DonationsTest extends TestCase
                     'path',
                     'per_page',
                     'to',
-                    'total'
-                ]
+                    'total',
+                ],
             ]
         );
     }
@@ -183,7 +183,7 @@ class DonationsTest extends TestCase
                     'first',
                     'last',
                     'prev',
-                    'next'
+                    'next',
                 ],
                 'meta' => [
                     'current_page',
@@ -192,8 +192,8 @@ class DonationsTest extends TestCase
                     'path',
                     'per_page',
                     'to',
-                    'total'
-                ]
+                    'total',
+                ],
             ]
         );
     }

@@ -3,7 +3,6 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Models\Person;
-use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 $factory->define(Person::class, function (Faker $faker) {
@@ -16,6 +15,6 @@ $factory->define(Person::class, function (Faker $faker) {
         'country' => $faker->country,
         'biography' => $faker->paragraph,
         'context' => $faker->paragraph,
-        'status' => 1
+        'status' => 1,
     ];
 });

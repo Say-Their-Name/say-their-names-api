@@ -9,7 +9,7 @@ class TypeUtils
     public static function getTypeId($name, $types)
     {
         $key = Str::ucfirst(Str::lower($name));
-        return array_key_exists($key, $types) ? $types[$key] : "";
+        return array_key_exists($key, $types) ? $types[$key] : '';
     }
 
     public static function typeMapToRows(array $types): array

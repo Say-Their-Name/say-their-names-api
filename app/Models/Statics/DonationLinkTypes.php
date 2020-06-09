@@ -22,7 +22,7 @@ class DonationLinkTypes extends Model
     const TYPES = [
         self::VICTIMS_TYPE => self::VICTIMS,
         self::PROTESTERS_TYPE => self::PROTESTERS,
-        self::MOVEMENT_TYPE => self::MOVEMENT
+        self::MOVEMENT_TYPE => self::MOVEMENT,
     ];
 
     protected $rows;

@@ -45,17 +45,17 @@ return [
             'name' => env('AIRTABLE_TABLE_VICTIMS'),
         ],
         'countries' => [
-            'name' => env('AIRTABLE_TABLE_COUNTRIES')
+            'name' => env('AIRTABLE_TABLE_COUNTRIES'),
         ],
         'cities' => [
-            'name' => env('AIRTABLE_TABLE_CITIES')
+            'name' => env('AIRTABLE_TABLE_CITIES'),
         ],
         'donations' => [
-            'name' => env('AIRTABLE_TABLE_DONATIONS')
+            'name' => env('AIRTABLE_TABLE_DONATIONS'),
         ],
         'petitions' => [
-            'name' => env('AIRTABLE_TABLE_PETITIONS')
-        ]
+            'name' => env('AIRTABLE_TABLE_PETITIONS'),
+        ],
 
     ],
 

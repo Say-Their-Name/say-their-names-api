@@ -22,7 +22,7 @@ class PetitionsTest extends TestCase
     {
         $petition = factory(PetitionLink::class)->create();
 
-        $response = $this->get("/api/petitions/$petition->identifier");
+        $response = $this->get("/api/petitions/{$petition->identifier}");
 
         $response->assertSuccessful();
 
@@ -56,7 +56,6 @@ class PetitionsTest extends TestCase
      */
     public function testGetAllPetitionsFilteredByType()
     {
-
         factory(PetitionLink::class, 9)->create([
             'type_id' => PetitionLinkTypes::FOR_POLICY,
         ]);
@@ -90,7 +89,7 @@ class PetitionsTest extends TestCase
     public function testGetAllPetitionsFilteredByName()
     {
         $person = factory(Person::class)->create([
-            'full_name' => 'George Floyd'
+            'full_name' => 'George Floyd',
         ]);
 
         factory(PetitionLink::class)->create([
@@ -98,7 +97,7 @@ class PetitionsTest extends TestCase
         ]);
 
         $personNotInArray = factory(Person::class)->create([
-            'full_name' => 'Sandra Bland'
+            'full_name' => 'Sandra Bland',
         ]);
 
         $response = $this->get('/api/petitions/?name=' . $person->indentifier . '');
@@ -120,7 +119,7 @@ class PetitionsTest extends TestCase
     {
         $response = $this->get('/api/petitions/343432432432');
 
-        $response->assertJsonFragment(['message' => "Not Found"]);
+        $response->assertJsonFragment(['message' => 'Not Found']);
     }
 
     /**
@@ -135,8 +134,8 @@ class PetitionsTest extends TestCase
                     'title',
                     'description',
                     'link',
-                    'person'
-                ]
+                    'person',
+                ],
             ]
         );
     }
@@ -154,15 +153,15 @@ class PetitionsTest extends TestCase
                         'title',
                         'description',
                         'link',
-                        'person'
-                    ]
+                        'person',
+                    ],
 
                 ],
                 'links' => [
                     'first',
                     'last',
                     'prev',
-                    'next'
+                    'next',
                 ],
                 'meta' => [
                     'current_page',
@@ -171,8 +170,8 @@ class PetitionsTest extends TestCase
                     'path',
                     'per_page',
                     'to',
-                    'total'
-                ]
+                    'total',
+                ],
             ]
         );
     }
@@ -189,7 +188,7 @@ class PetitionsTest extends TestCase
                     'first',
                     'last',
                     'prev',
-                    'next'
+                    'next',
                 ],
                 'meta' => [
                     'current_page',
@@ -198,8 +197,8 @@ class PetitionsTest extends TestCase
                     'path',
                     'per_page',
                     'to',
-                    'total'
-                ]
+                    'total',
+                ],
             ]
         );
     }

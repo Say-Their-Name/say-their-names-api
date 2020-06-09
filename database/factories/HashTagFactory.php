@@ -9,6 +9,6 @@ $factory->define(HashTag::class, function (Faker $faker) {
     return [
         'tag' => '#placeholder',
         'link' => $faker->url,
-        'status' => 1
+        'status' => 1,
     ];
 });

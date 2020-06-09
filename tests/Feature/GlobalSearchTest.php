@@ -28,7 +28,7 @@ class GlobalSearchTest extends TestCase
     {
         $person = factory(Person::class)->create();
 
-        $response = $this->get("/api/search?query=$person->full_name");
+        $response = $this->get("/api/search?query={$person->full_name}");
 
         $response->assertSuccessful();
 
@@ -48,7 +48,7 @@ class GlobalSearchTest extends TestCase
             [
                 'data' => [
                     'results' => [],
-                ]
+                ],
             ]
         );
     }

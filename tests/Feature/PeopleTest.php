@@ -45,7 +45,7 @@ class PeopleTest extends TestCase
     {
         $response = $this->get('/api/people/343432432432');
 
-        $response->assertJsonFragment(['message' => "Not Found"]);
+        $response->assertJsonFragment(['message' => 'Not Found']);
     }
 
     /**
@@ -56,11 +56,11 @@ class PeopleTest extends TestCase
     public function testGetAllPeopleFilteredByCountry()
     {
         $person = factory(Person::class)->create([
-            'country' => 'United Kingdom'
+            'country' => 'United Kingdom',
         ]);
 
         $personNotInArray = factory(Person::class)->create([
-            'country' => 'Brazil'
+            'country' => 'Brazil',
         ]);
 
         $country = 'United Kingdom';
@@ -98,11 +98,11 @@ class PeopleTest extends TestCase
     public function testGetAllPeopleFilteredByCity()
     {
         $person = factory(Person::class)->create([
-            'city' => 'New York'
+            'city' => 'New York',
         ]);
 
         $personNotInArray = factory(Person::class)->create([
-            'city' => 'Minnesota'
+            'city' => 'Minnesota',
         ]);
 
         $city = 'London';
@@ -171,11 +171,11 @@ class PeopleTest extends TestCase
     public function testGetAllPeopleFilteredByNameExactMatch()
     {
         $person = factory(Person::class)->create([
-            'full_name' => 'George Floyd'
+            'full_name' => 'George Floyd',
         ]);
 
         $personNotInArray = factory(Person::class)->create([
-            'full_name' => 'Sandra Bland'
+            'full_name' => 'Sandra Bland',
         ]);
 
         $response = $this->get('/api/people/?name=' . $person->full_name . '');
@@ -196,11 +196,11 @@ class PeopleTest extends TestCase
     public function testGetAllPeopleFilteredByNamePartialMatch()
     {
         $person = factory(Person::class)->create([
-            'full_name' => 'George Floyd'
+            'full_name' => 'George Floyd',
         ]);
 
         $personNotInArray = factory(Person::class)->create([
-            'full_name' => 'Sandra Bland'
+            'full_name' => 'Sandra Bland',
         ]);
 
         $response = $this->get('/api/people/?name=Geo');
@@ -252,8 +252,8 @@ class PeopleTest extends TestCase
                     'donation_links',
                     'petition_links',
                     'media',
-                    'hash_tags'
-                ]
+                    'hash_tags',
+                ],
             ]
         );
     }
@@ -277,14 +277,14 @@ class PeopleTest extends TestCase
                         'their_story',
                         'outcome',
                         'context',
-                        'images'
-                    ]
+                        'images',
+                    ],
                 ],
                 'links' => [
                     'first',
                     'last',
                     'prev',
-                    'next'
+                    'next',
                 ],
                 'meta' => [
                     'current_page',
@@ -293,8 +293,8 @@ class PeopleTest extends TestCase
                     'path',
                     'per_page',
                     'to',
-                    'total'
-                ]
+                    'total',
+                ],
             ]
         );
     }
@@ -311,7 +311,7 @@ class PeopleTest extends TestCase
                     'first',
                     'last',
                     'prev',
-                    'next'
+                    'next',
                 ],
                 'meta' => [
                     'current_page',
@@ -320,8 +320,8 @@ class PeopleTest extends TestCase
                     'path',
                     'per_page',
                     'to',
-                    'total'
-                ]
+                    'total',
+                ],
             ]
         );
     }

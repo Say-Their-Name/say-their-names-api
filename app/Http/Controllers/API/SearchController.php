@@ -20,8 +20,8 @@ class SearchController extends Controller
             ->search($request->input('query'));
         return response()->json([
             'data' => [
-                'results' => $results
-            ]
+                'results' => $results,
+            ],
         ]);
     }
 }

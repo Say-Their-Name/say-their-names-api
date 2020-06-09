@@ -76,8 +76,8 @@ class PeopleTableSeeder extends Seeder
                 continue;
             }
             $petitionCreated = $person->petitionLinks()->create([
-                'title' => "Petition For $person->full_name",
-                'description' => "Help bring justice to $person->full_name by signing this petition",
+                'title' => "Petition For {$person->full_name}",
+                'description' => "Help bring justice to {$person->full_name} by signing this petition",
                 'link' => $petition,
                 'outcome' => null,
                 'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
@@ -89,7 +89,7 @@ class PeopleTableSeeder extends Seeder
             $petitionCreated->hashtags()->create([
                 'tag' => '#petitionfor' . str_replace(' ', '', $person->full_name),
                 'link' => 'https://twitter.com/search?q=%23petitionfor' . str_replace(' ', '', $person->full_name),
-                'status' => 1
+                'status' => 1,
             ]);
         }
     }
@@ -101,8 +101,8 @@ class PeopleTableSeeder extends Seeder
                 continue;
             }
             $donationCreated = $person->donationLinks()->create([
-                'title' => "Donate to $person->full_name",
-                'description' => "Donate $person->full_name by donating here",
+                'title' => "Donate to {$person->full_name}",
+                'description' => "Donate {$person->full_name} by donating here",
                 'link' => $donation,
                 'outcome' => null,
                 'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
@@ -114,7 +114,7 @@ class PeopleTableSeeder extends Seeder
             $donationCreated->hashtags()->create([
                 'tag' => '#donateto' . str_replace(' ', '', $person->full_name),
                 'link' => 'https://twitter.com/search?q=%23donateto' . str_replace(' ', '', $person->full_name),
-                'status' => 1
+                'status' => 1,
             ]);
         }
     }
@@ -125,7 +125,7 @@ class PeopleTableSeeder extends Seeder
             $person->hashTags()->create([
                 'tag' => $hashtag,
                 'link' => 'https://twitter.com/search?q=' . urlencode($hashtag),
-                'status' => 1
+                'status' => 1,
             ]);
         }
     }
