@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/Say-Their-Name/say-their-names-api/workflows/CI/badge.svg)
 
-#Say Their Names ✊🏿
+# Say Their Names ✊🏿
 
 ## Overview
 
