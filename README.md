@@ -2,9 +2,7 @@
 
 ![CI](https://github.com/Say-Their-Name/say-their-names-api/workflows/CI/badge.svg)
 
-<p align="center">
-  <h1>Say Their Names ✊🏿</h1>
-</p>
+#Say Their Names ✊🏿
 
 ## Overview
 
@@ -15,11 +13,21 @@ Welcome to the Say Their Names project. Our aim is to build an open-source platf
 **We heartily welcome any and all contributions that match our engineering standards!**
 That being said, this codebase isn't your typical open source project because it's not a library or package with a limited scope—it's our entire product.
 
-<p align="center">
-<h3>Wan't to Contribute? Check out our other repositories</h3>
-<a href="https://github.com/Say-Their-Name/say-their-names-api">API</a>
-<a href="https://github.com/Say-Their-Name/say-their-names-ios">IOS</a>
-<a href="https://github.com/Say-Their-Name/say-their-names-android">Android</a>
-<a href="https://github.com/Say-Their-Name/say-their-names-web">Web</a>
-</p>
+<div align="center">
+    <h3>Wan't to Contribute? Check out our other repositories</h3>
+    <p>
+        <a href="https://github.com/Say-Their-Name/say-their-names-api">API</a>
+    </p>
+    <p>
+        <a href="https://github.com/Say-Their-Name/say-their-names-ios">IOS</a>
+    </p>
+    <p>
+        <a href="https://github.com/Say-Their-Name/say-their-names-android">Android</a>
+    </p>
+    <p>
+        <a href="https://github.com/Say-Their-Name/say-their-names-web">Web</a>
+    </p>
+</div>
+
+![Banner](https://say-their-names.fra1.cdn.digitaloceanspaces.com/assets/stn-logo.png)
 
