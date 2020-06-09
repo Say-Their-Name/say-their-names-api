@@ -115,8 +115,8 @@ class PeopleTableSeeder extends Seeder
             $donationCreated = $person->donationLinks()->updateOrCreate(
                 ['link' => $donation],
                 [
-                    'title' => "Donate to {$person->full_name}",
-                    'description' => "Donate {$person->full_name} by donating here",
+                    'title' => "Donate to the {$person->full_name} Memorial Fund",
+                    'description' => "Support the fight for justice for {$person->full_name} by donating to their family's memorial fund.",
                     'link' => $donation,
                     'outcome' => null,
                     'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
