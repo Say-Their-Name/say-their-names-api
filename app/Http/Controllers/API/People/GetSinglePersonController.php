@@ -8,6 +8,14 @@ use App\Models\Person;
 
 class GetSinglePersonController extends Controller
 {
+    public function __invoke($person)
+    {
+        return new PersonResource(
+            Person::complete()
+                ->where('identifier', $person)->firstOrFail()
+        );
+    }
+
     /**
      * @OA\Get(
      *    path="/api/people/{firstname-lastname}",
@@ -80,14 +88,5 @@ class GetSinglePersonController extends Controller
      *       )
      *     ),
      * )
-     * @param $person
-     * @return PersonResource
      */
-    public function __invoke($person)
-    {
-        return new PersonResource(
-            Person::complete()
-                ->where('identifier', $person)->firstOrFail()
-        );
-    }
 }

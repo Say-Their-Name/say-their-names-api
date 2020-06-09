@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "ext-json": "*",
         "calebporzio/sushi": "^2.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
@@ -18,13 +19,12 @@
         "laravel/framework": "^7.0",
         "laravel/sanctum": "^2.3",
         "laravel/tinker": "^2.0",
-        "maatwebsite/excel": "^3.1",
         "spatie/data-transfer-object": "^2.2",
         "spatie/laravel-searchable": "^1.6",
         "spatie/laravel-sluggable": "^2.4",
+        "tapp/laravel-airtable": "^0.14.0",
         "tucker-eric/eloquentfilter": "^2.3",
-        "zircote/swagger-php": "^3.0",
-        "ext-json": "*"
+        "zircote/swagger-php": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
-use App\Models\DonationLinks;
+use App\Models\DonationLink;
 use App\Models\Person;
-use App\Models\PetitionLinks;
+use App\Models\PetitionLink;
 use Spatie\Searchable\Search;
 
 class SearchController extends Controller
@@ -15,8 +15,8 @@ class SearchController extends Controller
     {
         $results = (new Search())
             ->registerModel(Person::class, ['full_name'])
-            ->registerModel(DonationLinks::class, ['title', 'description', 'link'])
-            ->registerModel(PetitionLinks::class, ['title', 'description', 'link'])
+            ->registerModel(DonationLink::class, ['title', 'description', 'link'])
+            ->registerModel(PetitionLink::class, ['title', 'description', 'link'])
             ->search($request->input('query'));
         return response()->json([
             'data' => [

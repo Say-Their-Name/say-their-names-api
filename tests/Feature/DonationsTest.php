@@ -2,6 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\DonationLink;
+use App\Models\Person;
+use App\Models\Statics\DonationLinkTypes;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -12,13 +15,13 @@ class DonationsTest extends TestCase
 
     public function testGetSingleDonation()
     {
-        $this->seed();
+        $donation  = factory(DonationLink::class)->create();
 
-        $response = $this->get('/api/donations/black-lives-matter-fund');
+        $response = $this->get("/api/donations/$donation->identifier");
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['identifier' => 'black-lives-matter-fund']);
+        $response->assertJsonFragment(['identifier' => $donation->identifier]);
 
         $this->validateDonationJSONStructure($response);
     }
@@ -30,10 +33,13 @@ class DonationsTest extends TestCase
      */
     public function testGetAllDonations()
     {
-        $this->seed();
+        $donations  = factory(DonationLink::class, 3)->create();
+
         $response = $this->get('/api/donations/');
 
         $response->assertSuccessful();
+
+        $response->assertJsonFragment(['total' => count($donations)]);
 
         $this->validateDonationsFoundJSONStructure($response);
     }
@@ -45,7 +51,9 @@ class DonationsTest extends TestCase
      */
     public function testGetAllDonationsFilteredByType()
     {
-        $this->seed();
+        factory(DonationLink::class, 3)->create([
+            'type_id' => DonationLinkTypes::VICTIMS
+        ]);
 
         $type = 'Victims';
         $response = $this->get('/api/donations/?type=' . $type . '');
@@ -60,14 +68,17 @@ class DonationsTest extends TestCase
 
     public function testGetAllDonationsFilteredByPerson()
     {
-        $this->seed();
+        $person = factory(Person::class)->create();
 
-        $name = 'george-floyd';
-        $response = $this->get('/api/donations/?name=' . $name . '');
+        factory(DonationLink::class)->create([
+            'person_id' => $person
+        ]);
+
+        $response = $this->get('/api/donations/?name=' . $person->identifier . '');
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['identifier' => $name]);
+        $response->assertJsonFragment(['identifier' => $person->identifier]);
         $response->assertJsonMissing(['identifier' => 'tony-mcdade']);
 
         $this->validateDonationsFoundJSONStructure($response);
@@ -132,8 +143,12 @@ class DonationsTest extends TestCase
                         'id',
                         'title',
                         'description',
+                        'outcome',
                         'link',
-                        'person'
+                        'outcome_img_url',
+                        'banner_img_url',
+                        'sharable_links',
+                        'person',
                     ]
 
                 ],

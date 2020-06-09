@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -10,14 +11,8 @@ class GlobalSearchTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test performing a global search on the API.
-     *
-     * @return void
-     */
     public function testGlobalSearchIsWorking()
     {
-        $this->seed();
         $response = $this->get('/api/search?query=test');
 
         $response->assertSuccessful();
@@ -31,13 +26,14 @@ class GlobalSearchTest extends TestCase
      */
     public function testSearchResultsAreAccurate()
     {
-        $this->seed();
-        $name = 'George Floyd';
-        $response = $this->get("/api/search?query=$name");
+        $person = factory(Person::class)->create();
+
+        $response = $this->get("/api/search?query=$person->full_name");
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['full_name' => $name]);
+        $response->assertJsonFragment(['full_name' => $person->full_name]);
+
         $response->assertJsonMissing(['full_name' => 'Tony']);
 
         $this->validateSearchJSONStructure($response);

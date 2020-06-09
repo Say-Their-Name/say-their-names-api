@@ -1,17 +1,132 @@
 <?php
 
-use App\Imports\DonationLinkImporter;
-use App\Imports\PersonImporter;
-use App\Imports\PetitionLinkImporter;
+use App\Models\Person;
+use App\Models\Statics\DonationLinkTypes;
+use App\Models\Statics\PetitionLinkTypes;
+use App\Models\Statics\StaticText;
 use Illuminate\Database\Seeder;
-use Maatwebsite\Excel\Facades\Excel;
+use Tapp\Airtable\Facades\AirtableFacade as Airtable;
 
 class PeopleTableSeeder extends Seeder
 {
     public function run()
     {
-        Excel::import(new PetitionLinkImporter(), storage_path('data/petitions.csv'));
-        Excel::import(new DonationLinkImporter(), storage_path('data/donations.csv'));
-        Excel::import(new PersonImporter(), storage_path('data/saytheirnames.csv'));
+        $airtablePeople = Airtable::table('victims')->all();
+
+        foreach ($airtablePeople as $people) {
+            $person = $this->createPerson($people['fields']);
+            if (isset($people['fields']['IMAGES'])) {
+                $this->createImages($person, $people['fields']['IMAGES']);
+            }
+            if (isset($people['fields']['NEWS LINKS'])) {
+                $this->createNews($person, $people['fields']['NEWS LINKS']);
+            }
+            if (isset($people['fields']['PETITION LINKS'])) {
+                $this->createPetitions($person, $people['fields']['PETITION LINKS']);
+            }
+            if (isset($people['fields']['DONATION LINKS'])) {
+                $this->createDonations($person, $people['fields']['DONATION LINKS']);
+            }
+            $this->createHashTags($person, $people['fields']['HASHTAGS']);
+        }
+    }
+
+    public function createPerson(array $row)
+    {
+        $person = new Person([
+            'full_name' => isset($row['NAME']) ? $row['NAME'] : null,
+            'date_of_incident' => isset($row['DATE OF INCIDENT']) ? $row['DATE OF INCIDENT'] : null,
+            'number_of_children' => isset($row['NUMBER OF CHILDREN']) ? $row['NUMBER OF CHILDREN'] : 0,
+            'age' => isset($row['AGE']) ? $row['AGE'] : null,
+            'city' => isset($row['CITY']) ? $row['CITY'] : null,
+            'country' => isset($row['COUNTRY']) ? $row['COUNTRY'] : null,
+            'context' => isset($row['CONTEXT']) ? $row['CONTEXT'] : StaticText::CONTRIBUTION_TEXT,
+            'outcome' => isset($row['OUTCOME']) ? $row['OUTCOME'] : StaticText::CONTRIBUTION_TEXT,
+            'biography' => isset($row['BIOGRAPHY']) ? $row['BIOGRAPHY'] : StaticText::CONTRIBUTION_TEXT,
+            'status' => 1,
+        ]);
+        $person->save();
+        return $person;
+    }
+
+    public function createImages(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $image) {
+            $person->images()->create([
+                'image_url' => $image,
+                'status' => 1,
+            ]);
+        }
+    }
+
+    public function createNews(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $image) {
+            $person->mediaLinks()->create([
+                'url' => $image,
+                'status' => 1,
+            ]);
+        }
+    }
+
+    public function createPetitions(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $petition) {
+            if ($petition == '') {
+                continue;
+            }
+            $petitionCreated = $person->petitionLinks()->create([
+                'title' => "Petition For $person->full_name",
+                'description' => "Help bring justice to $person->full_name by signing this petition",
+                'link' => $petition,
+                'outcome' => null,
+                'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'status' => 1,
+                'type_id' => PetitionLinkTypes::FOR_VICTIMS,
+            ]);
+
+            $petitionCreated->hashtags()->create([
+                'tag' => '#petitionfor' . str_replace(' ', '', $person->full_name),
+                'link' => 'https://twitter.com/search?q=%23petitionfor' . str_replace(' ', '', $person->full_name),
+                'status' => 1
+            ]);
+        }
+    }
+
+    public function createDonations(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $donation) {
+            if ($donation == '') {
+                continue;
+            }
+            $donationCreated = $person->donationLinks()->create([
+                'title' => "Donate to $person->full_name",
+                'description' => "Donate $person->full_name by donating here",
+                'link' => $donation,
+                'outcome' => null,
+                'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                'status' => 1,
+                'type_id' => DonationLinkTypes::VICTIMS,
+            ]);
+
+            $donationCreated->hashtags()->create([
+                'tag' => '#donateto' . str_replace(' ', '', $person->full_name),
+                'link' => 'https://twitter.com/search?q=%23donateto' . str_replace(' ', '', $person->full_name),
+                'status' => 1
+            ]);
+        }
+    }
+
+    public function createHashTags(Person $person, $row)
+    {
+        foreach (explode(',', $row) as $hashtag) {
+            $person->hashTags()->create([
+                'tag' => $hashtag,
+                'link' => 'https://twitter.com/search?q=' . urlencode($hashtag),
+                'status' => 1
+            ]);
+        }
     }
 }

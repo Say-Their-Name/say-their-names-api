@@ -18,7 +18,7 @@ class CreateDonationLinksTable extends Migration
             $table->text('description');
             $table->text('outcome')->nullable();
             $table->string('outcome_img_url')->nullable();
-            $table->string('link');
+            $table->longText('link');
             $table->json('sharable_links')->nullable();
             $table->foreign('person_id')->references('id')->on('people');
             $table->smallInteger('status')->default(0);

@@ -24,7 +24,8 @@ class PersonResource extends JsonResource
             'sharable_links' => $this->sharable_links,
             'donation_links' => DonationResource::collection($this->whenLoaded('donationLinks')),
             'petition_links' => PetitionResource::collection($this->whenLoaded('petitionLinks')),
-            'media_links' => MediaLinksResource::collection($this->whenLoaded('mediaLinks')),
+            'media' => $this->images,
+            'news' => MediaLinksResource::collection($this->whenLoaded('mediaLinks')),
             'hash_tags' => HashTagResource::collection($this->whenLoaded('hashTags')),
         ];
     }

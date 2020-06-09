@@ -3,10 +3,10 @@
 namespace App\Models\Filters;
 
 use App\Models\Filters\Traits\FilterableByPerson;
-use App\Models\Statics\PetitionLinkTypes;
+use App\Models\Statics\DonationLinkTypes;
 use EloquentFilter\ModelFilter;
 
-class PetitionLinksFilter extends ModelFilter
+class DonationLinkFilter extends ModelFilter
 {
     use FilterableByPerson;
 
@@ -14,6 +14,6 @@ class PetitionLinksFilter extends ModelFilter
 
     public function type($type)
     {
-        return $this->where('type_id', PetitionLinkTypes::fromName($type));
+        return $this->where('type_id', DonationLinkTypes::fromName($type));
     }
 }
