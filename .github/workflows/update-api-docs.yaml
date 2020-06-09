@@ -1,0 +1,23 @@
+name: Generate Docs
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  serve-api-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{github.head_ref}}
+      - name: Copy ENV Laravel Configuration for CI
+        run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+      - name: Install Composer Dependencies (PHP vendors)
+        run: composer install
+      - name: Build API docs
+        run: |
+          ./vendor/bin/openapi --format yaml --output ./docs/swagger.yaml ./app/
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: update api docs

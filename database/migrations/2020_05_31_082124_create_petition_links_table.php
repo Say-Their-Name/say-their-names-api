@@ -19,6 +19,7 @@ class CreatePetitionLinksTable extends Migration
             $table->text('outcome')->nullable();
             $table->string('outcome_img_url')->nullable();
             $table->string('link');
+            $table->json('sharable_links')->nullable();
             $table->foreign('person_id')->references('id')->on('people');
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();

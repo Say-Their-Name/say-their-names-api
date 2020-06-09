@@ -25,6 +25,9 @@ class RegisterRequest extends FormRequest
                 'min:6',
                 'confirmed',
             ],
+            'device_name' => [
+                'required',
+            ]
         ];
     }
 }
