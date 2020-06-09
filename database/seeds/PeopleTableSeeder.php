@@ -54,20 +54,24 @@ class PeopleTableSeeder extends Seeder
     public function createImages(Person $person, $row)
     {
         foreach (explode(',', $row) as $image) {
-            $person->images()->create([
-                'image_url' => $image,
-                'status' => 1,
-            ]);
+            $person->images()->updateOrCreate(
+                ['image_url' => $image],
+                [
+                    'status' => 1,
+                ]
+            );
         }
     }
 
     public function createNews(Person $person, $row)
     {
         foreach (explode(',', $row) as $image) {
-            $person->mediaLinks()->create([
-                'url' => $image,
-                'status' => 1,
-            ]);
+            $person->mediaLinks()->updateOrCreate(
+                ['url' => $image],
+                [
+                    'status' => 1,
+                ]
+            );
         }
     }
 
@@ -77,22 +81,28 @@ class PeopleTableSeeder extends Seeder
             if ($petition == '') {
                 continue;
             }
-            $petitionCreated = $person->petitionLinks()->create([
-                'title' => "Petition For {$person->full_name}",
-                'description' => "Help bring justice to {$person->full_name} by signing this petition",
-                'link' => $petition,
-                'outcome' => null,
-                'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
-                'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
-                'status' => 1,
-                'type_id' => PetitionLinkTypes::FOR_VICTIMS,
-            ]);
+            $petitionCreated = $person->petitionLinks()->updateOrCreate(
+                ['link' => $petition],
+                [
+                    'title' => "Petition For {$person->full_name}",
+                    'description' => "Help bring justice to {$person->full_name} by signing this petition",
+                    'link' => $petition,
+                    'outcome' => null,
+                    'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                    'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                    'status' => 1,
+                    'type_id' => PetitionLinkTypes::FOR_VICTIMS,
+                ]
+            );
 
-            $petitionCreated->hashtags()->create([
-                'tag' => '#petitionfor' . str_replace(' ', '', $person->full_name),
-                'link' => 'https://twitter.com/search?q=%23petitionfor' . str_replace(' ', '', $person->full_name),
-                'status' => 1,
-            ]);
+            $petitionCreated->hashtags()->updateOrCreate(
+                ['link' => 'https://twitter.com/search?q=%23petitionfor' . str_replace(' ', '', $person->full_name)],
+                [
+                    'tag' => '#petitionfor' . str_replace(' ', '', $person->full_name),
+                    'link' => 'https://twitter.com/search?q=%23petitionfor' . str_replace(' ', '', $person->full_name),
+                    'status' => 1,
+                ]
+            );
         }
     }
 
@@ -102,33 +112,42 @@ class PeopleTableSeeder extends Seeder
             if ($donation == '') {
                 continue;
             }
-            $donationCreated = $person->donationLinks()->create([
-                'title' => "Donate to {$person->full_name}",
-                'description' => "Donate {$person->full_name} by donating here",
-                'link' => $donation,
-                'outcome' => null,
-                'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
-                'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
-                'status' => 1,
-                'type_id' => DonationLinkTypes::VICTIMS,
-            ]);
+            $donationCreated = $person->donationLinks()->updateOrCreate(
+                ['link' => $donation],
+                [
+                    'title' => "Donate to {$person->full_name}",
+                    'description' => "Donate {$person->full_name} by donating here",
+                    'link' => $donation,
+                    'outcome' => null,
+                    'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                    'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                    'status' => 1,
+                    'type_id' => DonationLinkTypes::VICTIMS,
+                ]
+            );
 
-            $donationCreated->hashtags()->create([
-                'tag' => '#donateto' . str_replace(' ', '', $person->full_name),
-                'link' => 'https://twitter.com/search?q=%23donateto' . str_replace(' ', '', $person->full_name),
-                'status' => 1,
-            ]);
+            $donationCreated->hashtags()->updateOrCreate(
+                ['link' => 'https://twitter.com/search?q=%23donateto' . str_replace(' ', '', $person->full_name)],
+                [
+                    'tag' => '#donateto' . str_replace(' ', '', $person->full_name),
+                    'link' => 'https://twitter.com/search?q=%23donateto' . str_replace(' ', '', $person->full_name),
+                    'status' => 1,
+                ]
+            );
         }
     }
 
     public function createHashTags(Person $person, $row)
     {
         foreach (explode(',', $row) as $hashtag) {
-            $person->hashTags()->create([
-                'tag' => $hashtag,
-                'link' => 'https://twitter.com/search?q=' . urlencode($hashtag),
-                'status' => 1,
-            ]);
+            $person->hashTags()->updateOrCreate(
+                ['link' => 'https://twitter.com/search?q=' . urlencode($hashtag)],
+                [
+                    'tag' => $hashtag,
+                    'link' => 'https://twitter.com/search?q=' . urlencode($hashtag),
+                    'status' => 1,
+                ]
+            );
         }
     }
 }
