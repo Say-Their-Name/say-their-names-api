@@ -16,9 +16,9 @@ class DonationsTableSeeder extends Seeder
             DonationLink::updateOrCreate(
                 ['title' => $donation['fields']['TITLE'] ],
                 [
-                    'description' => isset($donation['fields']['DESCRIPTION']) ? $donation['fields']['DESCRIPTION'] : StaticText::CONTRIBUTION_TEXT,
+                    'description' => isset($donation['fields']['DESCRIPTION']) ? $donation['fields']['DESCRIPTION'] : null,
                     'link' => $donation['fields']['LINK'],
-                    'outcome' => isset($donation['fields']['OUTCOME']) ? $donation['fields']['OUTCOME'] : StaticText::CONTRIBUTION_TEXT,
+                    'outcome' => isset($donation['fields']['OUTCOME']) ? $donation['fields']['OUTCOME'] : null,
                     'banner_img_url' => $donation['fields']['IMAGE'],
                     'outcome_img_url' => $donation['fields']['OUTCOME IMAGE'],
                     'type_id' => DonationLinkTypes::MOVEMENT,

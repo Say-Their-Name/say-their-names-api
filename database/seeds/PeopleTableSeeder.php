@@ -41,9 +41,9 @@ class PeopleTableSeeder extends Seeder
                 'age' => isset($row['AGE']) ? $row['AGE'] : null,
                 'city' => isset($row['CITY']) ? $row['CITY'] : null,
                 'country' => isset($row['COUNTRY']) ? $row['COUNTRY'] : null,
-                'context' => isset($row['CONTEXT']) ? $row['CONTEXT'] : StaticText::CONTRIBUTION_TEXT,
-                'outcome' => isset($row['OUTCOME']) ? $row['OUTCOME'] : StaticText::CONTRIBUTION_TEXT,
-                'biography' => isset($row['BIOGRAPHY']) ? $row['BIOGRAPHY'] : StaticText::CONTRIBUTION_TEXT,
+                'context' => isset($row['CONTEXT']) ? $row['CONTEXT'] : null,
+                'outcome' => isset($row['OUTCOME']) ? $row['OUTCOME'] : null,
+                'biography' => isset($row['BIOGRAPHY']) ? $row['BIOGRAPHY'] : null,
                 'status' => 1,
             ]
         );

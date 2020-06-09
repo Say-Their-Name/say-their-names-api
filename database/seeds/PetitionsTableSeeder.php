@@ -18,7 +18,7 @@ class PetitionsTableSeeder extends Seeder
                 [
                     'description' => $petition['fields']['DESCRIPTION'],
                     'link' => $petition['fields']['LINK'],
-                    'outcome' => isset($petition['fields']['OUTCOME']) ? $petition['fields']['OUTCOME'] : StaticText::CONTRIBUTION_TEXT,
+                    'outcome' => isset($petition['fields']['OUTCOME']) ? $petition['fields']['OUTCOME'] : null,
                     'banner_img_url' => $petition['fields']['IMAGE'],
                     'outcome_img_url' => $petition['fields']['OUTCOME IMAGE'],
                     'type_id' => PetitionLinkTypes::FOR_POLICY,
