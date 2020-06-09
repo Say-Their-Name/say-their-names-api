@@ -116,7 +116,7 @@ class PeopleTableSeeder extends Seeder
                 ['link' => $donation],
                 [
                     'title' => "Donate to the {$person->full_name} fund",
-                    'description' => "Support the fight for justice for {$person->full_name}'s by donating here",
+                    'description' => "Support the fight for justice for {$person->full_name} by donating to their family's memorial fund.",
                     'link' => $donation,
                     'outcome' => null,
                     'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
