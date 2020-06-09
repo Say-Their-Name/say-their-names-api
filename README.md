@@ -90,7 +90,7 @@ List all
 http://localhost:8000/api/donations
 
 Get Single
-http://localhost:8000/api/donations/{id}
+http://localhost:8000/api/donations/{slug}
 
 Filter by Type
 http://localhost:8000/api/donations?type=victims
@@ -106,7 +106,7 @@ List All
 http://localhost:8000/api/petitions
 
 Get Single
-http://localhost:8000/api/petitions/{id}
+http://localhost:8000/api/petitions/{slug}
 
 Filter by Type
 http://localhost:8000/api/petitions?type=victims
