@@ -33,18 +33,20 @@ class PeopleTableSeeder extends Seeder
 
     public function createPerson(array $row)
     {
-        $person = new Person([
-            'full_name' => isset($row['NAME']) ? $row['NAME'] : null,
-            'date_of_incident' => isset($row['DATE OF INCIDENT']) ? $row['DATE OF INCIDENT'] : null,
-            'number_of_children' => isset($row['NUMBER OF CHILDREN']) ? $row['NUMBER OF CHILDREN'] : 0,
-            'age' => isset($row['AGE']) ? $row['AGE'] : null,
-            'city' => isset($row['CITY']) ? $row['CITY'] : null,
-            'country' => isset($row['COUNTRY']) ? $row['COUNTRY'] : null,
-            'context' => isset($row['CONTEXT']) ? $row['CONTEXT'] : StaticText::CONTRIBUTION_TEXT,
-            'outcome' => isset($row['OUTCOME']) ? $row['OUTCOME'] : StaticText::CONTRIBUTION_TEXT,
-            'biography' => isset($row['BIOGRAPHY']) ? $row['BIOGRAPHY'] : StaticText::CONTRIBUTION_TEXT,
-            'status' => 1,
-        ]);
+        $person = Person::updateOrCreate(
+            ['full_name' => isset($row['NAME']) ? $row['NAME'] : null],
+            [
+                'date_of_incident' => isset($row['DATE OF INCIDENT']) ? $row['DATE OF INCIDENT'] : null,
+                'number_of_children' => isset($row['NUMBER OF CHILDREN']) ? $row['NUMBER OF CHILDREN'] : 0,
+                'age' => isset($row['AGE']) ? $row['AGE'] : null,
+                'city' => isset($row['CITY']) ? $row['CITY'] : null,
+                'country' => isset($row['COUNTRY']) ? $row['COUNTRY'] : null,
+                'context' => isset($row['CONTEXT']) ? $row['CONTEXT'] : StaticText::CONTRIBUTION_TEXT,
+                'outcome' => isset($row['OUTCOME']) ? $row['OUTCOME'] : StaticText::CONTRIBUTION_TEXT,
+                'biography' => isset($row['BIOGRAPHY']) ? $row['BIOGRAPHY'] : StaticText::CONTRIBUTION_TEXT,
+                'status' => 1,
+            ]
+        );
         $person->save();
         return $person;
     }
