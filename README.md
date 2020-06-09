@@ -29,5 +29,8 @@ That being said, this codebase isn't your typical open source project because it
     </p>
 </div>
 
-![Banner](https://say-their-names.fra1.cdn.digitaloceanspaces.com/assets/stn-logo.png)
+## Docs 
 
+<p>
+    <a href="https://github.com/Say-Their-Name/say-their-names-api/wiki/Getting-Started">Getting Started</a>
+</p>
