@@ -19,7 +19,7 @@ class PersonResource extends JsonResource
             'country' => $this->country,
             'their_story' => $this->context,
             'outcome' => $this->outcome,
-            'context' => $this->context,
+            'biography' => $this->biography,
             'images' => $this->images,
             'sharable_links' => $this->sharable_links,
             'donation_links' => DonationResource::collection($this->whenLoaded('donationLinks')),
