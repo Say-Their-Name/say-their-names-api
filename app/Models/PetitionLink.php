@@ -42,7 +42,7 @@ class PetitionLink extends BaseModel implements Searchable
     protected static function booted()
     {
         static::saving(function ($model) {
-            $base = "https://www.saythiernames.io/sign/{$model->identifier}";
+            $base = "https://www.saytheirnames.io/sign/{$model->identifier}";
             $model->sharable_links = new SharableLinks([
                 'base' => $base,
                 'facebook' => "https://www.facebook.com/sharer/sharer.php?u=${base}",
