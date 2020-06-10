@@ -11,7 +11,7 @@ class GetSingleDonationController extends Controller
     public function __invoke($donation)
     {
         return new DonationResource(
-            DonationLink::with(['person', 'hashTags'])
+            DonationLink::with(['person', 'hashTags', 'type'])
                 ->where('identifier', $donation)
                 ->firstOrFail()
         );
