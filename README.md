@@ -20,7 +20,7 @@ Welcome to the Say Their Names project. Our aim is to build an open-source platf
 That being said, this codebase isn't your typical open source project because it's not a library or package with a limited scope—it's our entire product.
 
 <div align="center">
-    <h3>Wan't to Contribute? Check out our other repositories</h3>
+    <h3>Want to Contribute? Check out our other repositories</h3>
     <p>
         <a href="https://github.com/Say-Their-Name/say-their-names-api">API</a>
     </p>
