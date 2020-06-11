@@ -20,7 +20,11 @@ class PersonResource extends JsonResource
             'their_story' => $this->context,
             'outcome' => $this->outcome,
             'biography' => $this->biography,
-            'images' => $this->images,
+            'images' => $this->images()->exists() ? $this->images : [
+                'id' => 0,
+                'person_id' => $this->id,
+                'image_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/assets/cover.png',
+            ],
             'sharable_links' => $this->sharable_links,
             'donation_links' => DonationResource::collection($this->whenLoaded('donationLinks')),
             'petition_links' => PetitionResource::collection($this->whenLoaded('petitionLinks')),
