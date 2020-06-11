@@ -21,7 +21,9 @@ class DonationsTableSeeder extends Seeder
                     'outcome' => isset($donation['fields']['OUTCOME']) ? str_replace("\n\\n", '', $donation['fields']['OUTCOME']) : null,
                     'banner_img_url' => $donation['fields']['IMAGE'],
                     'outcome_img_url' => $donation['fields']['OUTCOME IMAGE'],
-                    'type_id' => DonationLinkTypes::MOVEMENT,
+                    'type_id' => DonationLinkTypes::firstOrCreate([
+                        'type' => $donation['fields']['TYPE'],
+                    ])->id,
                     'status' => 1,
                 ]
             );
