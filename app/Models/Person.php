@@ -11,10 +11,9 @@ use App\Models\Traits\HasMedia;
 use App\Models\Traits\HasPetitions;
 use App\Models\Traits\Unguarded;
 use EloquentFilter\Filterable;
+use Illuminate\Support\Str;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
 class Person extends BaseModel implements Searchable
 {
@@ -25,7 +24,6 @@ class Person extends BaseModel implements Searchable
     use HasHashTags;
     use HasBookmarks;
     use Filterable;
-    use HasSlug;
 
     const SLUG = 'identifier';
 
@@ -56,16 +54,10 @@ class Person extends BaseModel implements Searchable
         ]);
     }
 
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('full_name')
-            ->saveSlugsTo(self::SLUG);
-    }
-
     protected static function booted()
     {
         static::saving(function ($model) {
+            $model->identifier = Str::slug($model->full_name);
             $base = "https://www.saytheirnames.io/profile/{$model->identifier}";
             $model->sharable_links = new SharableLinks([
                 'base' => $base,

@@ -8,10 +8,9 @@ use App\Models\Traits\BelongsToPerson;
 use App\Models\Traits\HasDonationType;
 use App\Models\Traits\HasHashTags;
 use EloquentFilter\Filterable;
+use Illuminate\Support\Str;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
 class DonationLink extends BaseModel implements Searchable
 {
@@ -19,7 +18,6 @@ class DonationLink extends BaseModel implements Searchable
     use HasDonationType;
     use HasHashTags;
     use Filterable;
-    use HasSlug;
 
     const SLUG = 'identifier';
 
@@ -32,16 +30,10 @@ class DonationLink extends BaseModel implements Searchable
         return new SearchResult($this, $this->id);
     }
 
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo(self::SLUG);
-    }
-
     protected static function booted()
     {
         static::saving(function ($model) {
+            $model->identifier = Str::slug($model->title);
             $base = "https://www.saytheirnames.io/donate/{$model->identifier}";
             $model->sharable_links = new SharableLinks([
                 'base' => $base,

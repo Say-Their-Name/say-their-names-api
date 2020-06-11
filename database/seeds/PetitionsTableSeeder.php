@@ -16,9 +16,9 @@ class PetitionsTableSeeder extends Seeder
             PetitionLink::updateOrCreate(
                 ['title' => $petition['fields']['TITLE'] ],
                 [
-                    'description' => $petition['fields']['DESCRIPTION'],
+                    'description' => str_replace("\n\\n", '', $petition['fields']['DESCRIPTION']),
                     'link' => $petition['fields']['LINK'],
-                    'outcome' => isset($petition['fields']['OUTCOME']) ? $petition['fields']['OUTCOME'] : null,
+                    'outcome' => isset($petition['fields']['OUTCOME']) ? str_replace("\n\\n", '', $petition['fields']['OUTCOME']) : null,
                     'banner_img_url' => $petition['fields']['IMAGE'],
                     'outcome_img_url' => $petition['fields']['OUTCOME IMAGE'],
                     'type_id' => PetitionLinkTypes::FOR_POLICY,

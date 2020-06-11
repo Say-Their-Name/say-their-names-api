@@ -12,7 +12,7 @@ class GetSinglePetitionController extends Controller
     {
         return new PetitionResource(
             PetitionLink::with(['person', 'hashTags', 'type'])
-                ->where('identifier', $petition)
+                ->where(PetitionLink::SLUG, $petition)
                 ->firstOrFail()
         );
     }

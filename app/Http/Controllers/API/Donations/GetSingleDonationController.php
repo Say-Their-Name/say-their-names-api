@@ -12,7 +12,7 @@ class GetSingleDonationController extends Controller
     {
         return new DonationResource(
             DonationLink::with(['person', 'hashTags', 'type'])
-                ->where('identifier', $donation)
+                ->where(DonationLink::SLUG, $donation)
                 ->firstOrFail()
         );
     }

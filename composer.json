@@ -21,7 +21,6 @@
         "laravel/tinker": "^2.0",
         "spatie/data-transfer-object": "^2.2",
         "spatie/laravel-searchable": "^1.6",
-        "spatie/laravel-sluggable": "^2.4",
         "tapp/laravel-airtable": "^0.14.0",
         "tucker-eric/eloquentfilter": "^2.3",
         "zircote/swagger-php": "^3.0"

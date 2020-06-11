@@ -3,7 +3,6 @@
 use App\Models\Person;
 use App\Models\Statics\DonationLinkTypes;
 use App\Models\Statics\PetitionLinkTypes;
-use App\Models\Statics\StaticText;
 use Illuminate\Database\Seeder;
 use Tapp\Airtable\Facades\AirtableFacade as Airtable;
 
@@ -41,9 +40,9 @@ class PeopleTableSeeder extends Seeder
                 'age' => isset($row['AGE']) ? $row['AGE'] : null,
                 'city' => isset($row['CITY']) ? $row['CITY'] : null,
                 'country' => isset($row['COUNTRY']) ? $row['COUNTRY'] : null,
-                'context' => isset($row['CONTEXT']) ? $row['CONTEXT'] : null,
-                'outcome' => isset($row['OUTCOME']) ? $row['OUTCOME'] : null,
-                'biography' => isset($row['BIOGRAPHY']) ? $row['BIOGRAPHY'] : null,
+                'context' => isset($row['CONTEXT']) ? str_replace("\n\\n", '', $row['CONTEXT']) : null,
+                'outcome' => isset($row['OUTCOME']) ? str_replace("\n\\n", '', $row['OUTCOME']) : null,
+                'biography' => isset($row['BIOGRAPHY']) ? str_replace("\n\\n", '', $row['BIOGRAPHY']) : null,
                 'status' => 1,
             ]
         );
