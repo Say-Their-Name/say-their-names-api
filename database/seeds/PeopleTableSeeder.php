@@ -37,7 +37,7 @@ class PeopleTableSeeder extends Seeder
             ['full_name' => isset($row['NAME']) ? $row['NAME'] : null],
             [
                 'date_of_incident' => isset($row['DATE OF INCIDENT']) ? $row['DATE OF INCIDENT'] : null,
-                'number_of_children' => isset($row['NUMBER OF CHILDREN']) ? $row['NUMBER OF CHILDREN'] : 0,
+                'number_of_children' => $row['NUMBER OF CHILDREN'] != 'null' ? $row['NUMBER OF CHILDREN'] : null,
                 'age' => isset($row['AGE']) ? $row['AGE'] : null,
                 'city' => isset($row['CITY']) ? $row['CITY'] : null,
                 'country' => isset($row['COUNTRY']) ? $row['COUNTRY'] : null,
