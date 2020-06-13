@@ -4,15 +4,15 @@ namespace App\Http\Controllers\API\Petitions;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PetitionResource;
-use App\Models\PetitionLinks;
+use App\Models\PetitionLink;
 
 class GetSinglePetitionController extends Controller
 {
     public function __invoke($petition)
     {
         return new PetitionResource(
-            PetitionLinks::with(['person', 'hashTags'])
-                ->where('identifier', $petition)
+            PetitionLink::with(['person', 'hashTags', 'type'])
+                ->where(PetitionLink::SLUG, $petition)
                 ->firstOrFail()
         );
     }

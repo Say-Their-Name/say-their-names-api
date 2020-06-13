@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\DonationLinks;
+use App\Models\DonationLink;
 use Faker\Generator as Faker;
 
-$factory->define(DonationLinks::class, function (Faker $faker) {
+$factory->define(DonationLink::class, function (Faker $faker) {
     return [
         'title' => 'Lorem Ipsum Fund',
         'description' => $faker->paragraph,

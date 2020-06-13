@@ -8,8 +8,8 @@ trait FilterableByPerson
 {
     public function name($name)
     {
-        return $this->whereHas('person', function ($q) use ($name) {
-            $q->where(Person::SLUG, $name);
+        return $this->whereHas('person', function ($query) use ($name) {
+            $query->where(Person::SLUG, $name);
         })->get();
     }
 }

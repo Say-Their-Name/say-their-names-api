@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -12,27 +13,25 @@ class PeopleTest extends TestCase
 
     public function testGetSinglePerson()
     {
-        $this->seed();
-        $person = 'george-floyd';
-        $response = $this->get('/api/people/' . $person);
+        $person = factory(Person::class)->create();
+
+        $response = $this->get('/api/people/' . $person->identifier);
 
         $response->assertSuccessful();
-        $response->assertJsonFragment(['identifier' => $person]);
+        $response->assertJsonFragment(['identifier' => $person->identifier]);
 
         $this->validatePersonJSONStructure($response);
     }
 
-    /**
-     * Test retrieving getting all People from the People API.
-     *
-     * @return void
-     */
     public function testGetAllPeople()
     {
-        $this->seed();
+        $people = factory(Person::class, 6)->create();
+
         $response = $this->get('/api/people/');
 
         $response->assertSuccessful();
+
+        $response->assertJsonFragment(['total' => count($people)]);
 
         $this->validatePeopleFoundJSONStructure($response);
     }
@@ -46,7 +45,7 @@ class PeopleTest extends TestCase
     {
         $response = $this->get('/api/people/343432432432');
 
-        $response->assertJsonFragment(['message' => "Not Found"]);
+        $response->assertJsonFragment(['message' => 'Not Found']);
     }
 
     /**
@@ -56,15 +55,21 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByCountry()
     {
-        $this->seed();
+        $person = factory(Person::class)->create([
+            'country' => 'United Kingdom',
+        ]);
+
+        $personNotInArray = factory(Person::class)->create([
+            'country' => 'Brazil',
+        ]);
 
         $country = 'United Kingdom';
-        $response = $this->get('/api/people?country=' . $country . '');
+        $response = $this->get('/api/people?country=' . $person->country . '');
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['country' => $country]);
-        $response->assertJsonMissing(['country' => 'United States']);
+        $response->assertJsonFragment(['country' => $person->country]);
+        $response->assertJsonMissing(['country' => $personNotInArray->country]);
 
         $this->validatePeopleFoundJSONStructure($response);
     }
@@ -76,8 +81,6 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleNotFoundFilteredByCountry()
     {
-        $this->seed();
-
         $response = $this->get('/api/people/?country=fjdajsfkldajffda');
 
         $response->assertSuccessful();
@@ -94,15 +97,21 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByCity()
     {
-        $this->seed();
+        $person = factory(Person::class)->create([
+            'city' => 'New York',
+        ]);
+
+        $personNotInArray = factory(Person::class)->create([
+            'city' => 'Minnesota',
+        ]);
 
         $city = 'London';
-        $response = $this->get('/api/people/?city=' . $city . '');
+        $response = $this->get('/api/people/?city=' . $person->city . '');
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['city' => $city]);
-        $response->assertJsonMissing(['city' => 'Minnesota']);
+        $response->assertJsonFragment(['city' => $person->city]);
+        $response->assertJsonMissing(['city' => $personNotInArray->city]);
 
         $this->validatePeopleFoundJSONStructure($response);
     }
@@ -132,18 +141,24 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByCountryAndCity()
     {
-        $this->seed();
+        $person = factory(Person::class)->create([
+            'country' => 'United Kingdom',
+            'city' => 'London',
+        ]);
 
-        $country = 'United States';
-        $city = 'Tallahassee, FL';
-        $response = $this->get('/api/people/?country=' . $country . '&city=' . $city . '');
+        $personNotInArray = factory(Person::class)->create([
+            'country' => 'United States',
+            'city' => 'New york',
+        ]);
+
+        $response = $this->get('/api/people/?country=' . $person->country . '&city=' . $person->city . '');
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['country' => $country]);
-        $response->assertJsonFragment(['city' => $city]);
-        $response->assertJsonMissing(['country' => 'United Kingdom']);
-        $response->assertJsonMissing(['city' => 'Minnesota']);
+        $response->assertJsonFragment(['country' => $person->country]);
+        $response->assertJsonFragment(['city' => $person->city]);
+        $response->assertJsonMissing(['country' => $personNotInArray->country]);
+        $response->assertJsonMissing(['city' => $personNotInArray->city]);
 
         $this->validatePeopleFoundJSONStructure($response);
     }
@@ -155,15 +170,20 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByNameExactMatch()
     {
-        $this->seed();
+        $person = factory(Person::class)->create([
+            'full_name' => 'George Floyd',
+        ]);
 
-        $name = 'Sandra Bland';
-        $response = $this->get('/api/people/?name=' . $name . '');
+        $personNotInArray = factory(Person::class)->create([
+            'full_name' => 'Sandra Bland',
+        ]);
+
+        $response = $this->get('/api/people/?name=' . $person->full_name . '');
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['full_name' => $name]);
-        $response->assertJsonMissing(['full_name' => 'George Floyd']);
+        $response->assertJsonFragment(['full_name' => $person->full_name]);
+        $response->assertJsonMissing(['full_name' => $personNotInArray->full_name]);
 
         $this->validatePeopleFoundJSONStructure($response);
     }
@@ -175,15 +195,20 @@ class PeopleTest extends TestCase
      */
     public function testGetAllPeopleFilteredByNamePartialMatch()
     {
-        $this->seed();
+        $person = factory(Person::class)->create([
+            'full_name' => 'George Floyd',
+        ]);
 
-        $response = $this->get('/api/people/?name=Sa');
+        $personNotInArray = factory(Person::class)->create([
+            'full_name' => 'Sandra Bland',
+        ]);
+
+        $response = $this->get('/api/people/?name=Geo');
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['full_name' => 'Sandra Bland']);
-        $response->assertJsonFragment(['full_name' => 'Sarah Reed']);
-        $response->assertJsonMissing(['full_name' => 'Trayvon Martin']);
+        $response->assertJsonFragment(['full_name' => $person->full_name]);
+        $response->assertJsonMissing(['full_name' => $personNotInArray->full_name]);
 
         $this->validatePeopleFoundJSONStructure($response);
     }
@@ -222,13 +247,13 @@ class PeopleTest extends TestCase
                     'country',
                     'their_story',
                     'outcome',
-                    'context',
+                    'biography',
                     'images',
                     'donation_links',
                     'petition_links',
-                    'media_links',
-                    'hash_tags'
-                ]
+                    'media',
+                    'hash_tags',
+                ],
             ]
         );
     }
@@ -251,15 +276,15 @@ class PeopleTest extends TestCase
                         'country',
                         'their_story',
                         'outcome',
-                        'context',
-                        'images'
-                    ]
+                        'biography',
+                        'images',
+                    ],
                 ],
                 'links' => [
                     'first',
                     'last',
                     'prev',
-                    'next'
+                    'next',
                 ],
                 'meta' => [
                     'current_page',
@@ -268,8 +293,8 @@ class PeopleTest extends TestCase
                     'path',
                     'per_page',
                     'to',
-                    'total'
-                ]
+                    'total',
+                ],
             ]
         );
     }
@@ -286,7 +311,7 @@ class PeopleTest extends TestCase
                     'first',
                     'last',
                     'prev',
-                    'next'
+                    'next',
                 ],
                 'meta' => [
                     'current_page',
@@ -295,8 +320,8 @@ class PeopleTest extends TestCase
                     'path',
                     'per_page',
                     'to',
-                    'total'
-                ]
+                    'total',
+                ],
             ]
         );
     }

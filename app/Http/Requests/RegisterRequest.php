@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             ],
             'device_name' => [
                 'required',
-            ]
+            ],
         ];
     }
 }

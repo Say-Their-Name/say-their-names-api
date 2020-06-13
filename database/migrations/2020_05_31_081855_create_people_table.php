@@ -12,11 +12,11 @@ class CreatePeopleTable extends Migration
             $table->id();
             $table->string('full_name');
             $table->string('identifier');
-            $table->date('date_of_incident');
+            $table->date('date_of_incident')->nullable();
             $table->string('number_of_children')->nullable();
-            $table->string('age');
-            $table->string('city');
-            $table->string('country');
+            $table->string('age')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
             $table->text('biography')->nullable();
             $table->text('context')->nullable();
             $table->text('outcome')->nullable();

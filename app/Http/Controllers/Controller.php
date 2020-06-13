@@ -22,8 +22,8 @@ class Controller extends BaseController
  * )
  */
 /**
-* @OA\Tag(
-*     name="people",
-*     description="Find People",
-* )
-*/
+ * @OA\Tag(
+ *     name="people",
+ *     description="Find People",
+ * )
+ */

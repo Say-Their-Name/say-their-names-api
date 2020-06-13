@@ -20,7 +20,7 @@ class SharableLinksCast implements CastsAttributes
     public function set($model, $key, $value, $attributes)
     {
         if (! $value instanceof SharableLinks) {
-            throw new Exception("The provided value must be an instance of " . SharableLinks::class);
+            throw new Exception('The provided value must be an instance of ' . SharableLinks::class);
         }
         return json_encode($value->toArray());
     }

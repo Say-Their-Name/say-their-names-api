@@ -28,6 +28,10 @@ return PhpCsFixer\Config::create()
         'ordered_imports' => ['sortAlgorithm' => 'alpha'],
         'ternary_operator_spaces' => true,
         'single_blank_line_before_namespace' => true,
+        'single_quote' => true,
+        'explicit_string_variable' => true,
+        'trailing_comma_in_multiline_array' => true,
+        'align_multiline_comment' => true,
 
         // PSR-12
         'blank_line_after_opening_tag' => true,

@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(MediaLinks::class, function (Faker $faker) {
     return [
         'url' => $faker->url,
-        'status' => 1
+        'status' => 1,
     ];
 });

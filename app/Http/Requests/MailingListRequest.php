@@ -18,7 +18,7 @@ class MailingListRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-            ]
+            ],
         ];
     }
 }

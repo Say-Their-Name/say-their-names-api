@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\PetitionLinks;
+use App\Models\PetitionLink;
 use Faker\Generator as Faker;
 
-$factory->define(PetitionLinks::class, function (Faker $faker) {
+$factory->define(PetitionLink::class, function (Faker $faker) {
     return [
         'title' => 'Lorem Ipsum Fund',
         'description' => $faker->paragraph,
