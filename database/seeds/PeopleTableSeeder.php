@@ -13,20 +13,24 @@ class PeopleTableSeeder extends Seeder
         $airtablePeople = Airtable::table('victims')->all();
 
         foreach ($airtablePeople as $people) {
-            $person = $this->createPerson($people['fields']);
-            if (isset($people['fields']['IMAGES'])) {
-                $this->createImages($person, $people['fields']['IMAGES']);
+            if (isset($people['fields']['APPROVED']) && $people['fields']['APPROVED'] == 'true') {
+                $person = $this->createPerson($people['fields']);
+                if (isset($people['fields']['IMAGES'])) {
+                    $this->createImages($person, $people['fields']['IMAGES']);
+                }
+                if (isset($people['fields']['NEWS LINKS'])) {
+                    $this->createNews($person, $people['fields']['NEWS LINKS']);
+                }
+                if (isset($people['fields']['PETITION LINKS'])) {
+                    $this->createPetitions($person, $people['fields']['PETITION LINKS']);
+                }
+                if (isset($people['fields']['DONATION LINKS'])) {
+                    $this->createDonations($person, $people['fields']['DONATION LINKS']);
+                }
+                $this->createHashTags($person, $people['fields']['HASHTAGS']);
+            } else {
+                continue;
             }
-            if (isset($people['fields']['NEWS LINKS'])) {
-                $this->createNews($person, $people['fields']['NEWS LINKS']);
-            }
-            if (isset($people['fields']['PETITION LINKS'])) {
-                $this->createPetitions($person, $people['fields']['PETITION LINKS']);
-            }
-            if (isset($people['fields']['DONATION LINKS'])) {
-                $this->createDonations($person, $people['fields']['DONATION LINKS']);
-            }
-            $this->createHashTags($person, $people['fields']['HASHTAGS']);
         }
     }
 
