@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Models\Objects\SharableLinks;
 use App\Models\Person;
 use Faker\Generator as Faker;
 
@@ -16,5 +17,17 @@ $factory->define(Person::class, function (Faker $faker) {
         'biography' => $faker->paragraph,
         'context' => $faker->paragraph,
         'status' => 1,
+    ];
+});
+
+
+$factory->state(Person::class, 'withSharableLinks', function (Faker $faker) {
+    return [
+        'sharable_links' => new SharableLinks([
+            'base' => $faker->url,
+            'facebook' => $faker->url,
+            'twitter' => $faker->url,
+            'whatsapp' => $faker->url,
+        ])
     ];
 });
