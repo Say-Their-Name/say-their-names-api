@@ -23,23 +23,6 @@ class GlobalSearchTest extends TestCase
 
 
     /**
-     * Test retrieving anything from search with invalid input data
-     *
-     * @return void
-     */
-    public function testGlobalSearchNoNumbers()
-    {
-        $response = $this->get('/api/search?query=123');
-
-        $response->assertSuccessful();
-
-        $response->assertJsonFragment(['total' => 0]);
-
-
-        $this->validateSearchJSONStructure($response);
-    }
-
-    /**
      * Test retrieving Donations from Search
      *
      * @return void
