@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\PetitionLink;
 use App\Models\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
@@ -19,6 +20,49 @@ class GlobalSearchTest extends TestCase
         $this->validateSearchJSONStructure($response);
     }
 
+    public function testGlobalSearchNoNumbers()
+    {
+        $response = $this->get('/api/search?query=123');
+
+        $response->assertSuccessful();
+
+        $response->assertJsonFragment(['total' => 0]);
+
+
+        $this->validateSearchJSONStructure($response);
+    }
+
+    public function testSearchableByFundName()
+    {
+        $petition = factory(PetitionLink::class)->create([
+            'title' => 'Black Lives Matter',
+        ]);
+
+        $petitionNotInArray = factory(PetitionLink::class)->create([
+            'title' => 'David Dungay Jr',
+        ]);
+
+        $response = $this->get('/api/search?query=Black%20Lives');
+
+        $response->assertSuccessful();
+
+        $response->assertJsonFragment(['total' => 0]);
+
+        $this->validateSearchJSONStructure($response);
+    }
+
+
+    public function testSearchableByPetitionName()
+    {
+
+        $response = $this->get('/api/search?query=Defund%20The');
+
+        $response->assertSuccessful();
+
+        $this->validateSearchJSONStructure($response);
+    }
+
+
     /**
      * Test search API returns correct results.
      *
@@ -35,6 +79,9 @@ class GlobalSearchTest extends TestCase
         $response->assertJsonFragment(['full_name' => $person->full_name]);
 
         $response->assertJsonMissing(['full_name' => 'Tony']);
+
+        $response->assertJsonMissing(['full_name' => 'McDade']);
+
 
         $this->validateSearchJSONStructure($response);
     }

@@ -8,5 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(DonationTypes::class, function (Faker $faker) {
     return [
         //
+        'id' => 1,
     ];
 });
