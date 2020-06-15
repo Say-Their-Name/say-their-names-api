@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\DonationLink;
 use App\Models\PetitionLink;
 use App\Models\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,6 +21,12 @@ class GlobalSearchTest extends TestCase
         $this->validateSearchJSONStructure($response);
     }
 
+
+    /**
+     * Test retrieving anything from search with invalid input data
+     *
+     * @return void
+     */
     public function testGlobalSearchNoNumbers()
     {
         $response = $this->get('/api/search?query=123');
@@ -32,34 +39,42 @@ class GlobalSearchTest extends TestCase
         $this->validateSearchJSONStructure($response);
     }
 
-    public function testSearchableByFundName()
+    /**
+     * Test retrieving Donations from Search
+     *
+     * @return void
+     */
+    public function testSearchableByPetitionName()
     {
-        $petition = factory(PetitionLink::class)->create([
-            'title' => 'Black Lives Matter',
-        ]);
+        $petition = factory(PetitionLink::class)->create();
 
-        $petitionNotInArray = factory(PetitionLink::class)->create([
-            'title' => 'David Dungay Jr',
-        ]);
-
-        $response = $this->get('/api/search?query=Black%20Lives');
+        $response = $this->get("/api/search?query={$petition->title}");
 
         $response->assertSuccessful();
 
-        $response->assertJsonFragment(['total' => 0]);
+        $response->assertJsonFragment(['title' => $petition->title]);
 
         $this->validateSearchJSONStructure($response);
     }
 
-
-    public function testSearchableByPetitionName()
+    /**
+     * Test retrieving Petitions by Search
+     *
+     * @return void
+     */
+    public function testSearchableByDonationName()
     {
 
-        $response = $this->get('/api/search?query=Defund%20The');
+        $donation = factory(DonationLink::class)->create();
+
+        $response = $this->get("/api/search?query={$donation->title}");
 
         $response->assertSuccessful();
 
+        $response->assertJsonFragment(['title' => $donation->title]);
+
         $this->validateSearchJSONStructure($response);
+
     }
 
 
