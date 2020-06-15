@@ -20,12 +20,6 @@ class GlobalSearchTest extends TestCase
         $this->validateSearchJSONStructure($response);
     }
 
-
-    /**
-     * Test retrieving anything from search with invalid input data
-     *
-     * @return void
-     */
     public function testGlobalSearchNoNumbers()
     {
         $response = $this->get('/api/search?query=123');
@@ -38,11 +32,6 @@ class GlobalSearchTest extends TestCase
         $this->validateSearchJSONStructure($response);
     }
 
-    /**
-     * Test retrieving Donations from Search
-     *
-     * @return void
-     */
     public function testSearchableByFundName()
     {
         $petition = factory(PetitionLink::class)->create([
@@ -62,11 +51,7 @@ class GlobalSearchTest extends TestCase
         $this->validateSearchJSONStructure($response);
     }
 
-    /**
-     * Test retrieving Petitions by Search
-     *
-     * @return void
-     */
+
     public function testSearchableByPetitionName()
     {
 

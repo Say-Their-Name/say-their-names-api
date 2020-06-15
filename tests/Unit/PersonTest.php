@@ -24,7 +24,7 @@ class PersonTest extends TestCase
 
         $this->assertTrue( 
           Schema::hasColumns('people', [
-            'id', 'full_name', 'identifier', 'date_of_incident', 'number_of_children', 'city', 'country', 'context', 'outcome', 'sharable_links'
+            'id', 'full_name', 'identifier', 'date_of_incident', 'number_of_children', 'city', 'country', 'context', 'outcome', 'biography', 'sharable_links'
         ]), 1);
 
     }
