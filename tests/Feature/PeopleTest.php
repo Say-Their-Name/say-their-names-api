@@ -102,7 +102,7 @@ class PeopleTest extends TestCase
         ]);
 
         $personNotInArray = factory(Person::class)->create([
-            'city' => 'Minnesota',
+            'city' => 'Minneapolis',
         ]);
 
         $city = 'London';
@@ -204,6 +204,26 @@ class PeopleTest extends TestCase
         ]);
 
         $response = $this->get('/api/people/?name=Geo');
+
+        $response->assertSuccessful();
+
+        $response->assertJsonFragment(['full_name' => $person->full_name]);
+        $response->assertJsonMissing(['full_name' => $personNotInArray->full_name]);
+
+        $this->validatePeopleFoundJSONStructure($response);
+    }
+
+    public function testGetAllPeopleFilteredByNamePartialMatchNoCaseSensitive()
+    {
+        $person = factory(Person::class)->create([
+            'full_name' => 'George Floyd',
+        ]);
+
+        $personNotInArray = factory(Person::class)->create([
+            'full_name' => 'Sandra Bland',
+        ]);
+
+        $response = $this->get('/api/people/?name=geo');
 
         $response->assertSuccessful();
 
