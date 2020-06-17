@@ -33,6 +33,8 @@ class GlobalSearchTest extends TestCase
 
         $response = $this->get("/api/search?query={$petition->title}");
 
+        $response->assertStatus(200);
+
         $response->assertSuccessful();
 
         $response->assertJsonFragment(['title' => $petition->title]);
@@ -51,6 +53,8 @@ class GlobalSearchTest extends TestCase
         $donation = factory(DonationLink::class)->create();
 
         $response = $this->get("/api/search?query={$donation->title}");
+
+        $response->assertStatus(200);
 
         $response->assertSuccessful();
 

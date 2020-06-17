@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(PetitionTypes::class, function (Faker $faker) {
     return [
-        //
-        'id' => 1,
+        'id' => $faker->randomDigitNotNull,
+        'timestamp' => $faker->date(),
     ];
 });
