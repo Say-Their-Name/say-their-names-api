@@ -33,6 +33,8 @@ class GlobalSearchTest extends TestCase
 
         $response = $this->get("/api/search?query={$petition->title}");
 
+        $response->assertStatus(200);
+
         $response->assertSuccessful();
 
         $response->assertJsonFragment(['title' => $petition->title]);
@@ -71,6 +73,9 @@ class GlobalSearchTest extends TestCase
         $person = factory(Person::class)->create();
 
         $response = $this->get("/api/search?query={$person->full_name}");
+
+
+        $response->assertStatus(200);
 
         $response->assertSuccessful();
 
