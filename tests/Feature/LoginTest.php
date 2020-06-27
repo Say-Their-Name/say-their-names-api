@@ -13,30 +13,21 @@ class LoginTest extends TestCase
 
     public function testUserWithCorrectCredentialsCanLogIn()
     {
-        // Arrange.
-        // Create a user and prep a login request.
         $user = factory(User::class)->create(['password' => bcrypt('pw1234')]);
         $user->createToken('Pixel 4');
-        $data = [
+
+        $response = $this->postJson('/api/login', [
             'device_name' => 'Pixel 4',
             'email'       => $user->email,
             'password'    => 'pw1234',
-        ];
+        ]);
 
-        // Act.
-        // Attempt to log in.
-        $response = $this->postJson('/api/login', $data);
-
-        // Assert.
-        // Ensure the user is logged in.
         $response->assertSuccessful();
         $this->assertNotNull($response->decodeResponseJson('data.token'));
     }
 
     public function testUserWithIncorrectCredentialsCannotLogIn()
     {
-        // Arrange.
-        // Create a user and prep a login request.
         $user = factory(User::class)->create(['password' => bcrypt('pw1234')]);
         $user->createToken('Pixel 4');
         $data = [
@@ -45,12 +36,8 @@ class LoginTest extends TestCase
             'password'    => "I don't know the password.",
         ];
 
-        // Act.
-        // Attempt to log in.
         $response = $this->postJson('/api/login', $data);
 
-        // Assert.
-        // Ensure the user is NOT logged in.
         $responseData = $response->decodeResponseJson();
         $response->assertStatus(422);
         $this->assertEquals('The given data was invalid.', $responseData['message']);
