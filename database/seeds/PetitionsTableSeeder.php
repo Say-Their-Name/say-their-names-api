@@ -9,17 +9,17 @@ class PetitionsTableSeeder extends Seeder
 {
     public function run()
     {
-        $airtableDonations = AirtableFacade::table('petitions')->all();
+        $airtablePetitions = AirtableFacade::table('petitions')->all();
 
-        foreach ($airtableDonations as $petition) {
+        foreach ($airtablePetitions as $petition) {
             PetitionLink::updateOrCreate(
                 ['title' => $petition['fields']['TITLE'] ],
                 [
                     'description' => str_replace("\n\\n", '', $petition['fields']['DESCRIPTION']),
                     'link' => $petition['fields']['LINK'],
                     'outcome' => isset($petition['fields']['OUTCOME']) ? str_replace("\n\\n", '', $petition['fields']['OUTCOME']) : null,
-                    'banner_img_url' => $petition['fields']['IMAGE'],
-                    'outcome_img_url' => $petition['fields']['OUTCOME IMAGE'],
+                    'banner_img_url' => isset($petition['fields']['IMAGE']) ? $petition['fields']['IMAGE'] : null,
+                    'outcome_img_url' => isset($petition['fields']['OUTCOME IMAGE']) ? $petition['fields']['OUTCOME IMAGE'] : null,
                     'type_id' => PetitionLinkTypes::firstOrCreate([
                         'type' => $petition['fields']['TYPE'],
                     ])->id,

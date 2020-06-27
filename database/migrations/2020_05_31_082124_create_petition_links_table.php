@@ -15,7 +15,7 @@ class CreatePetitionLinksTable extends Migration
             $table->string('identifier');
             $table->string('banner_img_url')->nullable();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('outcome')->nullable();
             $table->string('outcome_img_url')->nullable();
             $table->longText('link');
