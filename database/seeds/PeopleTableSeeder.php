@@ -70,7 +70,7 @@ class PeopleTableSeeder extends Seeder
     {
         foreach (explode(',', $row) as $image) {
             $person->mediaLinks()->updateOrCreate(
-                ['url' => $image],
+                ['url' => str_replace(' ', '', $image)],
                 [
                     'status' => 1,
                 ]
@@ -85,7 +85,7 @@ class PeopleTableSeeder extends Seeder
                 continue;
             }
             $petitionCreated = $person->petitionLinks()->updateOrCreate(
-                ['link' => $petition],
+                ['link' => str_replace(' ', '', $petition)],
                 [
                     'title' => "Petition For {$person->full_name}",
                     'description' => "Help bring justice to {$person->full_name} by signing this petition",
@@ -116,7 +116,7 @@ class PeopleTableSeeder extends Seeder
                 continue;
             }
             $donationCreated = $person->donationLinks()->updateOrCreate(
-                ['link' => $donation],
+                ['link' => str_replace(' ', '', $donation)],
                 [
                     'title' => "Donate to the {$person->full_name} Memorial Fund",
                     'description' => "Support the fight for justice for {$person->full_name} by donating to their family's memorial fund.",
