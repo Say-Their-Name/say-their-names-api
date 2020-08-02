@@ -4,11 +4,11 @@ info:
   description: 'Find our more here: [https://github.com/Say-Their-Name/api](https://github.com/Say-Their-Name/api)'
   version: '1.0'
 paths:
-  '/api/people/{id}':
+  '/api/people/{firstname-lastname}':
     get:
       tags:
         - people
-      summary: 'Search People by id'
+      summary: 'Search People by identifier'
       operationId: getUserByID
       parameters:
         -
