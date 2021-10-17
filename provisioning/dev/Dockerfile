@@ -78,13 +78,12 @@ USER www-data
 ENV XDG_CONFIG_HOME "/var/www"
 ENV COMPOSER_HOME "/var/www/.composer"
 
-RUN composer global require hirak/prestissimo && \
-    composer global require bamarni/composer-bin-plugin && \
+RUN composer global require bamarni/composer-bin-plugin && \
     composer global bin phpcs require squizlabs/php_codesniffer && \
     composer global bin php-cs-fixer require friendsofphp/php-cs-fixer && \
     composer global bin phpmd require phpmd/phpmd && \
     composer global bin phpmnd require povils/phpmnd && \
-    composer global bin dephpend require dephpend/dephpend:dev-master && \
+    composer global bin dephpend require dephpend/dephpend:dev-main && \
     composer global bin phploc require phploc/phploc && \
     composer global bin phpcpd require sebastian/phpcpd && \
     composer global bin churn require bmitch/churn-php && \
