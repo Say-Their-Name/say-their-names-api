@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: overtrue/phplint@master
+      - uses: overtrue/phplint@7.4
       - name: Copy ENV Laravel Configuration for CI
         run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
       - name: Install Composer Dependencies (PHP vendors)
