@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     sqlite3 libsqlite3-dev \
     wget \
+    ca-certificates \
     zip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     npm install -g yarn
@@ -52,8 +53,8 @@ RUN echo 'memory_limit=2048M' >> /usr/local/etc/php/php.ini && \
     echo 'xdebug.remote_connect_back=0' >> /usr/local/etc/php/php.ini && \
     echo 'xdebug.var_display_max_depth=' >> /usr/local/etc/php/php.ini && \
     echo 'xdebug.remote_host=${HOST_IP}' >> /usr/local/etc/php/php.ini && \
-    curl -o /usr/lib/ssl/curl-cacert.pem https://curl.haxx.se/ca/cacert.pem && \
-    echo "curl.cainfo = '/usr/lib/ssl/curl-cacert.pem'" >> /usr/local/etc/php/php.ini
+    curl -o /usr/lib/ssl/curl-cacert.pem https://curl.se/ca/cacert.pem && \
+    echo 'curl.cainfo = "/usr/lib/ssl/curl-cacert.pem"' >> /usr/local/etc/php/php.ini
 
 RUN echo "php_flag[display_errors] = On">>/usr/local/etc/php-fpm.conf && \
     echo "php_admin_flag[log_errors] = On">>/usr/local/etc/php-fpm.conf && \
