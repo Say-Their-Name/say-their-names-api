@@ -24,7 +24,7 @@ class PersonResource extends JsonResource
                 [
                     'id' => 0,
                     'person_id' => $this->id,
-                    'image_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/assets/cover.png',
+                    'image_url' => 'https://saytheirnames.dev/images/assets/placeholder.png',
                 ],
             ],
             'sharable_links' => $this->sharable_links,
