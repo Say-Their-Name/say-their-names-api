@@ -1,4 +1,4 @@
-<!-- ![Banner](https://say-their-names.fra1.cdn.digitaloceanspaces.com/assets/cover.png) -->
+![Banner](https://saytheirnames.dev/images/assets/general_banner.png)
 
 <p align="center">
   <a href="#"><img src="https://github.com/Say-Their-Name/say-their-names-api/workflows/CI/badge.svg"></a>
@@ -46,4 +46,4 @@ That being said, this codebase isn't your typical open source project because it
     <a href="https://github.com/Say-Their-Name/say-their-names-api/wiki/Getting-Started">Getting Started</a>
 </p>
 
-<!-- <p align="center"><a href="https://vueformulate.com" target="_blank" rel="noopener noreferrer"><img width="100" src="https://say-their-names.fra1.cdn.digitaloceanspaces.com/assets/stn-logo.png" alt="Say Their Names Logo"></a></p> -->
+<p align="center"><a href="https://vueformulate.com" target="_blank" rel="noopener noreferrer"><img width="100" src="https://saytheirnames.dev/images/assets/general_banner.png" alt="Say Their Names Logo"></a></p>

@@ -91,8 +91,8 @@ class PeopleTableSeeder extends Seeder
                     'description' => "Help bring justice to {$person->full_name} by signing this petition",
                     'link' => $petition,
                     'outcome' => null,
-                    'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
-                    'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                    'banner_img_url' => 'https://saytheirnames.dev/images/assets/petition_banner.jpg',
+                    'outcome_img_url' => 'https://saytheirnames.dev/images/assets/petition_banner.jpg',
                     'status' => 1,
                     'type_id' => PetitionLinkTypes::FOR_VICTIMS,
                 ]
@@ -122,8 +122,8 @@ class PeopleTableSeeder extends Seeder
                     'description' => "Support the fight for justice for {$person->full_name} by donating to their family's memorial fund.",
                     'link' => $donation,
                     'outcome' => null,
-                    'banner_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
-                    'outcome_img_url' => 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/petition.png',
+                    'banner_img_url' => 'https://saytheirnames.dev/images/assets/petition_banner.jpg',
+                    'outcome_img_url' => 'https://saytheirnames.dev/images/assets/petition_banner.jpg',
                     'status' => 1,
                     'type_id' => DonationLinkTypes::VICTIMS,
                 ]
